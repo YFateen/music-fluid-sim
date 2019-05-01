@@ -22,7 +22,7 @@ if(APPLE)
   # Clang configuration
   if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
-    set(CLANG_CXX_FLAGS "-std=c++11 -m64")
+    set(CLANG_CXX_FLAGS "-std=c++17 -m64")
 
     if(BUILD_DEBUG)
       set(CMAKE_BUILD_TYPE Debug)
