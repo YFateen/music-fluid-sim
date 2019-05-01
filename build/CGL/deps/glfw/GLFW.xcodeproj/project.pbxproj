@@ -1,0 +1,1025 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1DCB5332504B4539958398EC /* uninstall */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 517F018C71284C3FBE88F75F /* Build configuration list for PBXAggregateTarget "uninstall" */;
+			buildPhases = (
+				AF14D471FACD4697B67C212B /* CMake Rules */,
+			);
+			dependencies = (
+				118CB5079F47481DAEED1FF3 /* PBXTargetDependency */,
+			);
+			name = uninstall;
+			productName = uninstall;
+		};
+		51FE47532BCA4AF8B7D91710 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8B088F771EE649F1BAF1A404 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				51C6AB5540C046F6AA8F2D90 /* CMake Rules */,
+			);
+			dependencies = (
+				4AFC8E84E3D34C0CB018FF0A /* PBXTargetDependency */,
+				52AD0432004649C1BE134AB3 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		9D6F3568FDA4425AA91418F0 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 24FBCB1D8A0E48BBA9C09ED8 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				5AAB8730146744858D7340AF /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		F4E4F49BBA1A44E996492525 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 97155AE737A74DC19C919209 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				A51C802D2674479B83AB3D76 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				AC1EFB1607784F2D8FB50FA8 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0D24B2B51E854577BF5B5CAE /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_init.m */ = {isa = PBXBuildFile; fileRef = 67E1728D59954DBAA7854C24 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_init.m */; };
+		10572E4191DB49799CC02542 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_window.m */ = {isa = PBXBuildFile; fileRef = CD3EFBEC8986451CA857FC5D /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_window.m */; };
+		11A7FC845CB44FDAA59503C9 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3.h */ = {isa = PBXBuildFile; fileRef = FA624D521F3743B6A7C03AFA /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3.h */; };
+		17170E90BD664FB7A7D63ACE /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.h */ = {isa = PBXBuildFile; fileRef = F17F666407574937BCA69212 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.h */; };
+		1B46CD2354E44AB2AC6A9C23 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_monitor.m */ = {isa = PBXBuildFile; fileRef = 8E229430680D45B98C9ADC5C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_monitor.m */; };
+		1FEB0FB612A14326B977229A /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_platform.h */ = {isa = PBXBuildFile; fileRef = EED4CBD303D04BB4A3A8609C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_platform.h */; };
+		34C4CF52C9AD4E5691FB4168 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/monitor.c */ = {isa = PBXBuildFile; fileRef = 113C97C4DC6C465394C6F411 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/monitor.c */; };
+		3BD4E533DC9C45F3A2A73334 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.m */ = {isa = PBXBuildFile; fileRef = 9949CF2BF4334D68BF03EE85 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.m */; };
+		3C3FBB2118DD4A959CDB4839 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.c */ = {isa = PBXBuildFile; fileRef = EBE273F344164FAEB9B827E0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.c */; };
+		411D3318D6CD4837BC686EE8 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/internal.h */ = {isa = PBXBuildFile; fileRef = 68A01BBB796E453AB18C7AF1 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/internal.h */; };
+		4B9C02A61DA841A2B5A4E1BA /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/window.c */ = {isa = PBXBuildFile; fileRef = 56B823BAEB274878A0FA769A /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/window.c */; };
+		518D30DCD1F44BFBA81D7047 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.h */ = {isa = PBXBuildFile; fileRef = 87ACA029851747E9BD33A967 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.h */; };
+		59D00DE22D734A47B00A3327 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3native.h */ = {isa = PBXBuildFile; fileRef = 143E26DADD7E4B03AC7487B1 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3native.h */; };
+		639C5B4F9D80412B9D392B91 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/mach_time.c */ = {isa = PBXBuildFile; fileRef = E7806722B7BA4435B9B1AD87 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/mach_time.c */; };
+		680E08F3461A46938F51A9B5 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = F4CE77875B4C4125BA2889D0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/CMakeLists.txt */; };
+		6BF2B4CCDEDE42D29A182EBF /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.h */ = {isa = PBXBuildFile; fileRef = B7D2968FA51042F5B11F5A45 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.h */; };
+		78073584293C42C0BD47EEE7 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/init.c */ = {isa = PBXBuildFile; fileRef = 078B5FA362704DFE9883723C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/init.c */; };
+		8B56E2B063B543E8A635B937 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/input.c */ = {isa = PBXBuildFile; fileRef = 823443C03E17427EA6D5EB6E /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/input.c */; };
+		B2FCA94357814EE5BDD7C237 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/context.c */ = {isa = PBXBuildFile; fileRef = 1F253259720A41A7945845B8 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/context.c */; };
+		DD20EC9791A94DF585EB4A1F /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.m */ = {isa = PBXBuildFile; fileRef = 466356BC50424315B0E13F58 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.m */; };
+		F8740775212946BA9E83BE83 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src/glfw_config.h */ = {isa = PBXBuildFile; fileRef = D5D6195DD4424A289FE8BFBF /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src/glfw_config.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		5DF62FE09DF549399BE03554 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		66154F937C8E4228909667FA /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		87F76BF39F934022A4013BA7 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		9E264F9D92DB4828A010614B /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		06E56F2737124AF58A8B38C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FDF384F66794B749B5A02A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D6F3568FDA4425AA91418F0;
+			remoteInfo = ZERO_CHECK;
+		};
+		3B2D24E29BA14C069019E83A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FDF384F66794B749B5A02A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 51FE47532BCA4AF8B7D91710;
+			remoteInfo = ALL_BUILD;
+		};
+		5BE14E2C8A044BB58D834698 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FDF384F66794B749B5A02A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB27D405CF2F4A4585416F02;
+			remoteInfo = glfw;
+		};
+		A4BFA52793324CCCBF80515D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FDF384F66794B749B5A02A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D6F3568FDA4425AA91418F0;
+			remoteInfo = ZERO_CHECK;
+		};
+		C862C007D72147A884A0D251 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FDF384F66794B749B5A02A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D6F3568FDA4425AA91418F0;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		078B5FA362704DFE9883723C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/init.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = init.c; path = src/init.c; sourceTree = SOURCE_ROOT; };
+		113C97C4DC6C465394C6F411 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/monitor.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = monitor.c; path = src/monitor.c; sourceTree = SOURCE_ROOT; };
+		143E26DADD7E4B03AC7487B1 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3native.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = glfw3native.h; path = include/GLFW/glfw3native.h; sourceTree = SOURCE_ROOT; };
+		1F253259720A41A7945845B8 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/context.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = context.c; path = src/context.c; sourceTree = SOURCE_ROOT; };
+		3F831784FAED40869780CEB0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		466356BC50424315B0E13F58 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = iokit_joystick.m; path = src/iokit_joystick.m; sourceTree = SOURCE_ROOT; };
+		56B823BAEB274878A0FA769A /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/window.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = window.c; path = src/window.c; sourceTree = SOURCE_ROOT; };
+		67E1728D59954DBAA7854C24 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_init.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_init.m; path = src/cocoa_init.m; sourceTree = SOURCE_ROOT; };
+		68A01BBB796E453AB18C7AF1 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/internal.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = internal.h; path = src/internal.h; sourceTree = SOURCE_ROOT; };
+		823443C03E17427EA6D5EB6E /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/input.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = input.c; path = src/input.c; sourceTree = SOURCE_ROOT; };
+		87ACA029851747E9BD33A967 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = iokit_joystick.h; path = src/iokit_joystick.h; sourceTree = SOURCE_ROOT; };
+		8E229430680D45B98C9ADC5C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_monitor.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_monitor.m; path = src/cocoa_monitor.m; sourceTree = SOURCE_ROOT; };
+		9949CF2BF4334D68BF03EE85 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = nsgl_context.m; path = src/nsgl_context.m; sourceTree = SOURCE_ROOT; };
+		B7D2968FA51042F5B11F5A45 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = posix_tls.h; path = src/posix_tls.h; sourceTree = SOURCE_ROOT; };
+		CD3EFBEC8986451CA857FC5D /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_window.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_window.m; path = src/cocoa_window.m; sourceTree = SOURCE_ROOT; };
+		CF768CA8C8324C75AC0F91F3 /* glfw */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglfw3.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5D6195DD4424A289FE8BFBF /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src/glfw_config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = glfw_config.h; path = ../../../build/CGL/deps/glfw/src/glfw_config.h; sourceTree = SOURCE_ROOT; };
+		D8D31D64D243408EB4A98A97 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E7806722B7BA4435B9B1AD87 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/mach_time.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = mach_time.c; path = src/mach_time.c; sourceTree = SOURCE_ROOT; };
+		EBE273F344164FAEB9B827E0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = posix_tls.c; path = src/posix_tls.c; sourceTree = SOURCE_ROOT; };
+		EED4CBD303D04BB4A3A8609C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_platform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = cocoa_platform.h; path = src/cocoa_platform.h; sourceTree = SOURCE_ROOT; };
+		F17F666407574937BCA69212 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = nsgl_context.h; path = src/nsgl_context.h; sourceTree = SOURCE_ROOT; };
+		F4CE77875B4C4125BA2889D0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = src/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		FA624D521F3743B6A7C03AFA /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = glfw3.h; path = include/GLFW/glfw3.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		41C2F05FD7F5425DA0106F1D /* uninstall */ = {
+			isa = PBXGroup;
+			children = (
+				8455981A9E6B4D67A66430B2 /* CMake Rules */,
+				D8D31D64D243408EB4A98A97 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/CMakeLists.txt */,
+			);
+			name = uninstall;
+			sourceTree = "<group>";
+		};
+		575812AFB7DF4327872FC5DB /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA624D521F3743B6A7C03AFA /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3.h */,
+				143E26DADD7E4B03AC7487B1 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/include/GLFW/glfw3native.h */,
+				EED4CBD303D04BB4A3A8609C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_platform.h */,
+				68A01BBB796E453AB18C7AF1 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/internal.h */,
+				87ACA029851747E9BD33A967 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.h */,
+				F17F666407574937BCA69212 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.h */,
+				B7D2968FA51042F5B11F5A45 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.h */,
+				D5D6195DD4424A289FE8BFBF /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src/glfw_config.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		5FDC8813BFD04C2EA43B42C8 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				67E1728D59954DBAA7854C24 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_init.m */,
+				8E229430680D45B98C9ADC5C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_monitor.m */,
+				CD3EFBEC8986451CA857FC5D /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_window.m */,
+				1F253259720A41A7945845B8 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/context.c */,
+				078B5FA362704DFE9883723C /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/init.c */,
+				823443C03E17427EA6D5EB6E /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/input.c */,
+				466356BC50424315B0E13F58 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.m */,
+				E7806722B7BA4435B9B1AD87 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/mach_time.c */,
+				113C97C4DC6C465394C6F411 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/monitor.c */,
+				9949CF2BF4334D68BF03EE85 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.m */,
+				EBE273F344164FAEB9B827E0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.c */,
+				56B823BAEB274878A0FA769A /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/window.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		61BD168AC5F149EB81E29160 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8455981A9E6B4D67A66430B2 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		85C48D60729A458DA3D0FA4B /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				61BD168AC5F149EB81E29160 /* CMake Rules */,
+				3F831784FAED40869780CEB0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		B4CD075E7CE04180A1532857 /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				5FDC8813BFD04C2EA43B42C8 /* Source Files */,
+				575812AFB7DF4327872FC5DB /* Header Files */,
+				F4CE77875B4C4125BA2889D0 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/CMakeLists.txt */,
+			);
+			name = glfw;
+			sourceTree = "<group>";
+		};
+		D508E227124248998ED24570 = {
+			isa = PBXGroup;
+			children = (
+				41C2F05FD7F5425DA0106F1D /* uninstall */,
+				85C48D60729A458DA3D0FA4B /* ALL_BUILD */,
+				F36764F2583B4E7FB7A1E2DE /* GLFW3 */,
+				F88FAFE8D3824690B7E8C44D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F36764F2583B4E7FB7A1E2DE /* GLFW3 */ = {
+			isa = PBXGroup;
+			children = (
+				B4CD075E7CE04180A1532857 /* glfw */,
+			);
+			name = GLFW3;
+			sourceTree = "<group>";
+		};
+		F88FAFE8D3824690B7E8C44D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF768CA8C8324C75AC0F91F3 /* glfw */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB27D405CF2F4A4585416F02 /* glfw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9BFBBC1CAFE493EBAA64819 /* Build configuration list for PBXNativeTarget "glfw" */;
+			buildPhases = (
+				36C957DFA95247C2950DB16C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C15716BDED334CBDAED810EA /* PBXTargetDependency */,
+			);
+			name = glfw;
+			productName = glfw;
+			productReference = CF768CA8C8324C75AC0F91F3 /* glfw */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4FDF384F66794B749B5A02A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1010;
+			};
+			buildConfigurationList = 66624B343EF7485CA3300FE3 /* Build configuration list for PBXProject "GLFW" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				87F76BF39F934022A4013BA7 /* Debug */,
+				9E264F9D92DB4828A010614B /* Release */,
+				5DF62FE09DF549399BE03554 /* MinSizeRel */,
+				66154F937C8E4228909667FA /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = D508E227124248998ED24570;
+			projectDirPath = ../../../../CGL/deps/glfw;
+			projectRoot = "";
+			targets = (
+				51FE47532BCA4AF8B7D91710 /* ALL_BUILD */,
+				9D6F3568FDA4425AA91418F0 /* ZERO_CHECK */,
+				FB27D405CF2F4A4585416F02 /* glfw */,
+				F4E4F49BBA1A44E996492525 /* install */,
+				1DCB5332504B4539958398EC /* uninstall */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51C6AB5540C046F6AA8F2D90 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw -f /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		5AAB8730146744858D7340AF /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw -f /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		6B40B23E20B34925996D1B4E = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		7A615B07D6DE4F7B86FB447A = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		7BB6260D2B7645DBBCB47E77 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		A51C802D2674479B83AB3D76 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw -f /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		AF14D471FACD4697B67C212B /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw -f /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/CMakeScripts/uninstall_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		FFC6AA666C604B97A63F9BF3 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		36C957DFA95247C2950DB16C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D24B2B51E854577BF5B5CAE /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_init.m */,
+				1B46CD2354E44AB2AC6A9C23 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_monitor.m */,
+				10572E4191DB49799CC02542 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/cocoa_window.m */,
+				B2FCA94357814EE5BDD7C237 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/context.c */,
+				78073584293C42C0BD47EEE7 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/init.c */,
+				8B56E2B063B543E8A635B937 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/input.c */,
+				DD20EC9791A94DF585EB4A1F /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/iokit_joystick.m */,
+				639C5B4F9D80412B9D392B91 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/mach_time.c */,
+				34C4CF52C9AD4E5691FB4168 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/monitor.c */,
+				3BD4E533DC9C45F3A2A73334 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/nsgl_context.m */,
+				3C3FBB2118DD4A959CDB4839 /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/posix_tls.c */,
+				4B9C02A61DA841A2B5A4E1BA /* /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src/window.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		118CB5079F47481DAEED1FF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D6F3568FDA4425AA91418F0 /* ZERO_CHECK */;
+			targetProxy = C862C007D72147A884A0D251 /* PBXContainerItemProxy */;
+		};
+		4AFC8E84E3D34C0CB018FF0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB27D405CF2F4A4585416F02 /* glfw */;
+			targetProxy = 5BE14E2C8A044BB58D834698 /* PBXContainerItemProxy */;
+		};
+		52AD0432004649C1BE134AB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D6F3568FDA4425AA91418F0 /* ZERO_CHECK */;
+			targetProxy = A4BFA52793324CCCBF80515D /* PBXContainerItemProxy */;
+		};
+		AC1EFB1607784F2D8FB50FA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 51FE47532BCA4AF8B7D91710 /* ALL_BUILD */;
+			targetProxy = 3B2D24E29BA14C069019E83A /* PBXContainerItemProxy */;
+		};
+		C15716BDED334CBDAED810EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D6F3568FDA4425AA91418F0 /* ZERO_CHECK */;
+			targetProxy = 06E56F2737124AF58A8B38C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00404C92D88842B0B2A7A691 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		0E1769E65404431B8C9555B1 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",GLEW_STATIC,_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src","/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG -fPIC -w   -Wall";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		1A6AB3BCF067435A8D1E2AE9 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		4DB6201497CD41F5B3BEE9FE /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = uninstall;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		4E098519011B43C285686BF7 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4F86E98CB9464674B4ECA1CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/build";
+			};
+			name = Debug;
+		};
+		51A45C01E775461DBE944D16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = uninstall;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		5380CF3645A5439E83323EFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/build";
+			};
+			name = Release;
+		};
+		591A94B8C0D543BBBAD3F082 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		5E412879F6F843C0837D3473 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = uninstall;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		69FC2C2CC84E41F18B3311E9 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/build";
+			};
+			name = RelWithDebInfo;
+		};
+		6BABB8D7571D4F4DBE8F17FE /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",GLEW_STATIC,_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src","/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "       -DNDEBUG -fPIC -w   -Wall";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		88BFEC16D3354246B2EC0E25 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		891DB1BACD9E44AA886B71B9 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		8B2A89F77F0B4CADB530BEA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		9E00C71B7D364F40B89AA720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		A2CE946B9C9D47818819711A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",GLEW_STATIC,_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src","/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG -fPIC -w   -Wall";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		A5F1B246DED043778B55EE6F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		B79E6AA683FF43E88B94A173 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",GLEW_STATIC,_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/CGL/deps/glfw/src","/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "   -fPIC -w   -Wall";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		CD3E98ED707C42DBBD7A9B58 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/build";
+			};
+			name = MinSizeRel;
+		};
+		D0A83FD096AA408D86721BE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = uninstall;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		DBCF6B4C6BD94346B67B7948 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		F19A90E2131042399FCA87A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		FBE617E69DB24344BAA78284 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		24FBCB1D8A0E48BBA9C09ED8 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E00C71B7D364F40B89AA720 /* Debug */,
+				FBE617E69DB24344BAA78284 /* Release */,
+				A5F1B246DED043778B55EE6F /* MinSizeRel */,
+				88BFEC16D3354246B2EC0E25 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		517F018C71284C3FBE88F75F /* Build configuration list for PBXAggregateTarget "uninstall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51A45C01E775461DBE944D16 /* Debug */,
+				D0A83FD096AA408D86721BE4 /* Release */,
+				4DB6201497CD41F5B3BEE9FE /* MinSizeRel */,
+				5E412879F6F843C0837D3473 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		66624B343EF7485CA3300FE3 /* Build configuration list for PBXProject "GLFW" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F86E98CB9464674B4ECA1CF /* Debug */,
+				5380CF3645A5439E83323EFE /* Release */,
+				CD3E98ED707C42DBBD7A9B58 /* MinSizeRel */,
+				69FC2C2CC84E41F18B3311E9 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8B088F771EE649F1BAF1A404 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B2A89F77F0B4CADB530BEA7 /* Debug */,
+				DBCF6B4C6BD94346B67B7948 /* Release */,
+				1A6AB3BCF067435A8D1E2AE9 /* MinSizeRel */,
+				4E098519011B43C285686BF7 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		97155AE737A74DC19C919209 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00404C92D88842B0B2A7A691 /* Debug */,
+				F19A90E2131042399FCA87A3 /* Release */,
+				891DB1BACD9E44AA886B71B9 /* MinSizeRel */,
+				591A94B8C0D543BBBAD3F082 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D9BFBBC1CAFE493EBAA64819 /* Build configuration list for PBXNativeTarget "glfw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B79E6AA683FF43E88B94A173 /* Debug */,
+				A2CE946B9C9D47818819711A /* Release */,
+				0E1769E65404431B8C9555B1 /* MinSizeRel */,
+				6BABB8D7571D4F4DBE8F17FE /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4FDF384F66794B749B5A02A4 /* Project object */;
+}
