@@ -50,8 +50,9 @@ void DrawRend::render() {
     rasterize_particle(&p);
   }
   draw_pixels();
-  if (show_zoom)
-    draw_zoom();
+  resolve();
+//  if (show_zoom)
+//    draw_zoom();
 }
 
 /**
@@ -559,8 +560,8 @@ void DrawRend::rasterize_triangle(float x0, float y0,
 
 void DrawRend::particles_init() {
   particles.emplace_back(
-      Vector2D(210, 210), 100, Vector2D(), Vector2D(),
-      Color(1.0, 0, 1.0));
+      Vector2D(200, 200), 50, Vector2D(), Vector2D(),
+      Color(1.0, 0.2, 1.0));
 }
 
 
