@@ -14,11 +14,11 @@ namespace CGL {
 
 class DrawRend : public Renderer {
  public:
-//  DrawRend(std::vector<SVG*> svgs_):
-//  svgs(svgs_), current_svg(0)
-//  {}
+  DrawRend(int audio_rate, std::vector<int> audio_magnitude):
+      audio_rate(audio_rate), audio_magnitude(audio_magnitude)
+  {}
 
-  ~DrawRend( void );
+  ~DrawRend();
 
   // inherited Renderer interface functions
   void init();
@@ -88,6 +88,10 @@ private:
   bool left_clicked;
   int show_zoom;
   int sample_rate;
+
+  // Audio
+  int audio_rate;
+  std::vector<int> audio_magnitude;
 
   PixelSampleMethod psm;
   LevelSampleMethod lsm;

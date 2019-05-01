@@ -103,9 +103,6 @@ vector<SVG*> loadPath( const char* path ) {
 
 
 int main( int argc, char** argv ) {
-
-  // TODO: get rid of all this svg stuff
-
 //  if (argc < 2) {
 //    msg("Not enough arguments. Pass in an .svg or a directory of .svg files.");
 //    return 0;
@@ -116,9 +113,18 @@ int main( int argc, char** argv ) {
 //    msg("No svg files successfully loaded. Exiting.");
 //    return 0;
 //  }
+  // Placeholder inputs
+  int sample_rate = 10;
+  std::vector<int> audio_signal(1000);
+  for (int i = 0; i < 500; i++) {
+    audio_signal[i] = i;
+  }
+  for (int i = 500; i < 1000; i++) {
+    audio_signal[i] = 1000 - i;
+  }
 
   // create application
-  DrawRend app;
+  DrawRend app(sample_rate, audio_signal);
 
 
 
