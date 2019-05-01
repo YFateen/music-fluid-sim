@@ -1,12 +1,11 @@
 //
-//  particle.hpp
-//  CGL
+//  particle.h
 //
 //  Created by Yusuf Fateen on 4/30/19.
 //
 
-#ifndef particle_hpp
-#define particle_hpp
+#ifndef CGL_PARTICLE_H
+#define CGL_PARTICLE_H
 #include <stdio.h>
 #include <string>
 #include <sstream>
