@@ -27,12 +27,12 @@ void DrawRend::init() {
   left_clicked = false;
   show_zoom = 0;
 
-  svg_to_ndc.resize(svgs.size());
-  for (int i = 0; i < svgs.size(); ++i) {
-    current_svg = i;
+//  svg_to_ndc.resize(svgs.size());
+//  for (int i = 0; i < svgs.size(); ++i) {
+//    current_svg = i;
     view_init();
-  }
-  current_svg = 0;
+//  }
+//  current_svg = 0;
   psm = P_NEAREST;
   lsm = L_ZERO;
 
@@ -44,8 +44,8 @@ void DrawRend::init() {
 */
 void DrawRend::render() {
   draw_pixels();
-  if (show_zoom)
-    draw_zoom();
+//  if (show_zoom)
+//    draw_zoom();
 }
 
 /**
@@ -100,10 +100,10 @@ std::string DrawRend::info() {
 void DrawRend::cursor_event( float x, float y ) {
   // translate when left mouse button is held down
   if (left_clicked) {
-    float dx = (x - cursor_x) / width  * svgs[current_svg]->width;
-    float dy = (y - cursor_y) / height * svgs[current_svg]->height;
-    move_view(dx,dy,1);
-    redraw();
+//    float dx = (x - cursor_x) / width  * svgs[current_svg]->width;
+//    float dy = (y - cursor_y) / height * svgs[current_svg]->height;
+//    move_view(dx,dy,1);
+//    redraw();
   }
 
   // register new cursor location
@@ -164,11 +164,11 @@ void DrawRend::keyboard_event( int key, int event, unsigned char mods ) {
     return;
 
   // tab through the loaded files
-  if (key >= '1' && key <= '9' && key-'1' < svgs.size()) {
-    current_svg = key - '1';
-    redraw();
-    return;
-  }
+//  if (key >= '1' && key <= '9' && key-'1' < svgs.size()) {
+//    current_svg = key - '1';
+//    redraw();
+//    return;
+//  }
 
   switch( key ) {
 
@@ -300,19 +300,19 @@ void DrawRend::redraw() {
     for (int j = 0; j < samplebuffer[i].size(); ++j)
       samplebuffer[i][j].clear();
 
-  SVG &svg = *svgs[current_svg];
-  svg.draw(this, ndc_to_screen*svg_to_ndc[current_svg]);
+//  SVG &svg = *svgs[current_svg];
+//  svg.draw(this, ndc_to_screen*svg_to_ndc[current_svg]);
+//
+//   draw canvas outline
+//  Vector2D a = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(    0    ,     0    )); a.x--; a.y++;
+//  Vector2D b = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(svg.width,     0    )); b.x++; b.y++;
+//  Vector2D c = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(    0    ,svg.height)); c.x--; c.y--;
+//  Vector2D d = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(svg.width,svg.height)); d.x++; d.y--;
 
-  // draw canvas outline
-  Vector2D a = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(    0    ,     0    )); a.x--; a.y++;
-  Vector2D b = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(svg.width,     0    )); b.x++; b.y++;
-  Vector2D c = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(    0    ,svg.height)); c.x--; c.y--;
-  Vector2D d = ndc_to_screen*svg_to_ndc[current_svg]*(Vector2D(svg.width,svg.height)); d.x++; d.y--;
-
-  rasterize_line(a.x, a.y, b.x, b.y, Color::Black);
-  rasterize_line(a.x, a.y, c.x, c.y, Color::Black);
-  rasterize_line(d.x, d.y, b.x, b.y, Color::Black);
-  rasterize_line(d.x, d.y, c.x, c.y, Color::Black);
+//  rasterize_line(a.x, a.y, b.x, b.y, Color::Black);
+//  rasterize_line(a.x, a.y, c.x, c.y, Color::Black);
+//  rasterize_line(d.x, d.y, b.x, b.y, Color::Black);
+//  rasterize_line(d.x, d.y, c.x, c.y, Color::Black);
 
   resolve();
   if (gl)
@@ -428,8 +428,8 @@ void DrawRend::draw_zoom() {
  * with a bit of margin.
  */
 void DrawRend::view_init() {
-  float w = svgs[current_svg]->width, h = svgs[current_svg]->height;
-  set_view(w/2, h/2, 1.2 * std::max(w,h) / 2);
+//  float w = svgs[current_svg]->width, h = svgs[current_svg]->height;
+//  set_view(w/2, h/2, 1.2 * std::max(w,h) / 2);
 }
 
 /**
@@ -439,7 +439,7 @@ void DrawRend::view_init() {
  * corresponds to the [0,1]^2 rectangle.
  */
 void DrawRend::set_view(float x, float y, float span) {
-  svg_to_ndc[current_svg] = Matrix3x3(1,0,-x+span,  0,1,-y+span,  0,0,2*span);
+//  svg_to_ndc[current_svg] = Matrix3x3(1,0,-x+span,  0,1,-y+span,  0,0,2*span);
 }
 
 /**
@@ -447,10 +447,10 @@ void DrawRend::set_view(float x, float y, float span) {
  * then shifts and zooms the viewing window by setting a new view matrix.
  */
 void DrawRend::move_view(float dx, float dy, float zoom) {
-  Matrix3x3& m = svg_to_ndc[current_svg];
-  float span = m(2,2)/2.;
-  float x = span - m(0,2), y = span - m(1,2);
-  set_view(x - dx, y - dy, span * zoom);
+//  Matrix3x3& m = svg_to_ndc[current_svg];
+//  float span = m(2,2)/2.;
+//  float x = span - m(0,2), y = span - m(1,2);
+//  set_view(x - dx, y - dy, span * zoom);
 }
 
 // Rasterize a point.

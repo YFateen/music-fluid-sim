@@ -13,9 +13,9 @@ namespace CGL {
 
 class DrawRend : public Renderer {
  public:
-  DrawRend(std::vector<SVG*> svgs_):
-  svgs(svgs_), current_svg(0)
-  {}
+//  DrawRend(std::vector<SVG*> svgs_):
+//  svgs(svgs_), current_svg(0)
+//  {}
 
   ~DrawRend( void );
 
@@ -66,7 +66,7 @@ class DrawRend : public Renderer {
 
 private:
   // Global state variables for SVGs, pixels, and view transforms
-  std::vector<SVG*> svgs; size_t current_svg;
+//  std::vector<SVG*> svgs; size_t current_svg;
   std::vector<Matrix3x3> svg_to_ndc;
   float view_x, view_y, view_span;
 

@@ -2,12 +2,12 @@
 # Kayvon Fatahalian, Keenan Crane,
 # Sky Gao, Bryce Summers, Michael Choquette.
 cmake_minimum_required(VERSION 2.8)
-project(Assignment1)
+project(ChoreographedFluidSimulator)
 
 #-------------------------------------------------------------------------------
 # Build options
 #-------------------------------------------------------------------------------
-option(BUILD_DEBUG     "Build with debug settings"    OFF)
+option(BUILD_DEBUG     "Build with debug settings"    ON)
 option(BUILD_DOCS      "Build documentation"          OFF)
 
 #-------------------------------------------------------------------------------
