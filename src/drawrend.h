@@ -8,6 +8,7 @@
 #include <cstring>
 #include "GLFW/glfw3.h"
 #include "svg.h"
+#include "particle.h"
 
 namespace CGL {
 
@@ -43,6 +44,8 @@ class DrawRend : public Renderer {
   void draw_pixels();
   void draw_zoom();
 
+  void particles_init();
+
   // view transform functions
   void view_init();
   void set_view(float x, float y, float span);
@@ -56,17 +59,22 @@ class DrawRend : public Renderer {
                        float x1, float y1,
                        Color color);
 
+  // rasterize a square
+  void rasterize_square(float x, float y, float size, Color color);
+
   // rasterize a triangle
   void rasterize_triangle( float x0, float y0,
                            float x1, float y1,
                            float x2, float y2,
                            Color color, Triangle *tri = NULL );
 
+  void rasterize_particle(Particle *particle);
 
 
 private:
   // Global state variables for SVGs, pixels, and view transforms
 //  std::vector<SVG*> svgs; size_t current_svg;
+  std::vector<Particle> particles;
   std::vector<Matrix3x3> svg_to_ndc;
   float view_x, view_y, view_span;
 

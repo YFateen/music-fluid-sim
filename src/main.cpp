@@ -120,6 +120,8 @@ int main( int argc, char** argv ) {
   // create application
   DrawRend app;
 
+
+
   if (argc > 4 && strcmp(argv[2],"nogl") == 0) {
     app.init();
     app.set_gl(false);

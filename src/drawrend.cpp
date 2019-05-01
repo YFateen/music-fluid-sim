@@ -6,6 +6,7 @@
 #include <sstream>
 #include "CGL/lodepng.h"
 #include "texture.h"
+#include "particle.h"
 #include <ctime>
 using namespace std;
 
@@ -27,6 +28,7 @@ void DrawRend::init() {
   left_clicked = false;
   show_zoom = 0;
 
+    particles_init();
 //  svg_to_ndc.resize(svgs.size());
 //  for (int i = 0; i < svgs.size(); ++i) {
 //    current_svg = i;
@@ -44,6 +46,9 @@ void DrawRend::init() {
 */
 void DrawRend::render() {
   draw_pixels();
+  for (Particle &p : particles) {
+    rasterize_particle(&p);
+  }
 //  if (show_zoom)
 //    draw_zoom();
 }
@@ -491,6 +496,25 @@ void DrawRend::rasterize_line( float x0, float y0,
   }
 }
 
+// Rasterize a square.
+void DrawRend::rasterize_square( float x, float y, float size, Color color ) {
+  for (int sx = max(0, (int) x); sx < min(0, (int) width); sx++) {
+    for (int sy = max(0, (int) y); sy < min(0, (int) height); sy++) {
+      samplebuffer[sy][sx].fill_pixel(color);
+    }
+  }
+}
+
+
+void DrawRend::rasterize_particle(Particle *particle) {
+  // Draw a "circle" centered at x, y
+  float x = particle->getPosition()[0];
+  float y = particle->getPosition()[1];
+  float radius = particle->getRadius();
+
+  rasterize_square(x-radius, y-radius, radius*2, particle->getColor());
+}
+
 // Rasterize a triangle.
 void DrawRend::rasterize_triangle( float x0, float y0,
                          float x1, float y1,
@@ -516,6 +540,11 @@ void DrawRend::rasterize_triangle( float x0, float y0,
 
 }
 
+void DrawRend::particles_init() {
+  particles.push_back(Particle(
+      {100, 100}, 10, {}, {},
+      {255, 0, 255}));
+}
 
 
 }
