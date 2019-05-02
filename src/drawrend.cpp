@@ -547,24 +547,34 @@ void DrawRend::rasterize_circle(float xCoordinate, float yCoordinate, float radi
     
 void DrawRend::circle_draw_helper(int xCoordinate, int yCoordinate, int tempX, int tempY, Color color) {
     //WARNING: Assumes that vectors contain integers.
-    samplebuffer[yCoordinate+tempY][xCoordinate+tempX].fill_pixel(color);
-    samplebuffer[yCoordinate+tempY][xCoordinate-tempX].fill_pixel(color);
-    samplebuffer[yCoordinate-tempY][xCoordinate+tempX].fill_pixel(color);
-    samplebuffer[yCoordinate-tempY][xCoordinate- tempX].fill_pixel(color);
-    samplebuffer[yCoordinate+tempX][xCoordinate+tempY].fill_pixel(color);
-    samplebuffer[yCoordinate+tempX][xCoordinate-tempY].fill_pixel(color);
-    samplebuffer[yCoordinate-tempX][xCoordinate+tempY].fill_pixel(color);
-    samplebuffer[yCoordinate-tempX][xCoordinate- tempY].fill_pixel(color);
+//    samplebuffer[yCoordinate+tempY][xCoordinate+tempX].fill_pixel(color);
+//    samplebuffer[yCoordinate+tempY][xCoordinate-tempX].fill_pixel(color);
+//    samplebuffer[yCoordinate-tempY][xCoordinate+tempX].fill_pixel(color);
+//    samplebuffer[yCoordinate-tempY][xCoordinate- tempX].fill_pixel(color);
+//    samplebuffer[yCoordinate+tempX][xCoordinate+tempY].fill_pixel(color);
+//    samplebuffer[yCoordinate+tempX][xCoordinate-tempY].fill_pixel(color);
+//    samplebuffer[yCoordinate-tempX][xCoordinate+tempY].fill_pixel(color);
+//    samplebuffer[yCoordinate-tempX][xCoordinate- tempY].fill_pixel(color);
+//
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate+tempX, yCoordinate+tempY, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate-tempX, yCoordinate+tempY, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate+tempX, yCoordinate-tempY, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate-tempX, yCoordinate-tempY, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate+tempY, yCoordinate+tempX, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate-tempY, yCoordinate+tempX, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate+tempY, yCoordinate-tempX, color);
+    rasterize_line(xCoordinate, yCoordinate, xCoordinate-tempY, yCoordinate-tempX, color);
+    
 }
 
 void DrawRend::rasterize_particle(Particle *particle) {
   // Draw a "circle" centered at x, y
-  float x = particle->getPosition()[0];
-  float y = particle->getPosition()[1];
+  float xCoordinate = particle->getPosition()[0];
+  float yCoordinate = particle->getPosition()[1];
   float radius = particle->getRadius();
 
 //  rasterize_square(x - radius, y - radius, radius * 2, particle->getColor());
-    rasterize_circle(x, y, radius, particle->getColor());
+    rasterize_circle(xCoordinate, yCoordinate, radius, particle->getColor());
 }
 
 // Rasterize a triangle.
