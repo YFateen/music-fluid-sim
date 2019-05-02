@@ -8,6 +8,9 @@
 #include "texture.h"
 #include "particle.h"
 #include <ctime>
+#include <cstdlib>  // For srand() and rand()
+#include <random>
+
 
 using namespace std;
 
@@ -528,7 +531,7 @@ void DrawRend::rasterize_circle(float xCoordinate, float yCoordinate, float radi
     int tempX = 0;
     int tempY = radius;
     int condition = 3 - 2 * (int) radius;
-    circle_draw_helper((int)xCoordinate, (int) yCoordinate, x, y, color);
+    circle_draw_helper((int)xCoordinate, (int) yCoordinate, tempX, tempY, color);
     
     while (tempY >= tempX) {
         tempX++;
@@ -589,10 +592,43 @@ void DrawRend::rasterize_triangle(float x0, float y0,
 }
 
 void DrawRend::particles_init() {
-  particles.emplace_back(
-      Vector2D(200, 200), 50, Vector2D(), Vector2D(),
-      Color(1.0, 0.2, 1.0));
+
+particles.emplace_back(
+                       Vector2D(200, 200), 50, Vector2D(), Vector2D(),
+                       Color(1.0, 0.2, 1.0));
+    
+particles.emplace_back(
+                       Vector2D(400, 400), 75, Vector2D(), Vector2D(),
+                       Color(.3, 0.2, 1.0));
+    
+particles.emplace_back(
+                       Vector2D(700, 200), 20, Vector2D(), Vector2D(),
+                       Color(.9, 0.2, .01));
+    
+particles.emplace_back(
+                       Vector2D(350, 600), 20, Vector2D(), Vector2D(),
+                       Color(.2, 0.2, .91));
+
+particles.emplace_back(
+                       Vector2D(150, 500), 40, Vector2D(), Vector2D(),
+                       Color(.1, 0.2, .42));
+
+particles.emplace_back(
+                       Vector2D(300, 200), 30, Vector2D(), Vector2D(),
+                       Color(.9, 0.1, .87));
+
+particles.emplace_back(
+                       Vector2D(700, 500), 10, Vector2D(), Vector2D(),
+                       Color(.3, 0.7, 1.0));
+
+    
+    
+//
+//particles.emplace_back(
+//                       Vector2D(400, 400), 75, Vector2D(), Vector2D(),
+//                       Color(.3, 0.2, 1.0));
+
+
 }
-
-
+    
 }
