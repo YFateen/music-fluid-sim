@@ -102,91 +102,104 @@ vector<SVG*> loadPath( const char* path ) {
 }
 
 
-//int main( int argc, char** argv ) {
-int main() {
-
-//
+int main( int argc, char** argv ) {
 //  if (argc < 2) {
 //    msg("Not enough arguments. Pass in an .svg or a directory of .svg files.");
 //    return 0;
 //  }
-//
+
 //  vector<SVG*> svgs(loadPath(argv[1]));
 //  if (svgs.empty()) {
 //    msg("No svg files successfully loaded. Exiting.");
 //    return 0;
 //  }
+  // Placeholder inputs
+  int sample_rate = 10;
+  std::vector<int> audio_signal(1000);
+  for (int i = 0; i < 500; i++) {
+    audio_signal[i] = i;
+  }
+  for (int i = 500; i < 1000; i++) {
+    audio_signal[i] = 1000 - i;
+  }
 
+    int debug = 0;
+    
   // create application
-//  DrawRend app(svgs);
-//
-//  if (argc > 4 && strcmp(argv[2],"nogl") == 0) {
-//    app.init();
-//    app.set_gl(false);
-//    app.resize(stoi(argv[3]), stoi(argv[4]));
-//    app.write_framebuffer();
-//    return 0;
-//  }
-//
-//  // create viewer
-//  Viewer viewer = Viewer();
-//
-//  // set renderer
-//  viewer.set_renderer(&app);
-//
-//  // init viewer
-//  viewer.init();
-//
-//  // start viewer
-//  viewer.start();
-//
-//  exit(EXIT_SUCCESS);
-//
-//  return 0;
+  DrawRend app(sample_rate, audio_signal);
 
-//    std::cout << "FUCK ME";
-    glewExperimental = true; // Needed for core profile
-    if( !glfwInit() )
-    {
-        fprintf( stderr, "Failed to initialize GLFW\n" );
-        return -1;
-    }
-    
-    glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL
-    
-    // Open a window and create its OpenGL context
-    GLFWwindow* window; // (In the accompanying source code, this variable is global for simplicity)
-    window = glfwCreateWindow( 1024, 768, "Basic Box", NULL, NULL);
-    if( window == NULL ){
-        fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window); // Initialize GLEW
-    glewExperimental=true; // Needed in core profile
-    if (glewInit() != GLEW_OK) {
-        fprintf(stderr, "Failed to initialize GLEW\n");
-        return -1;
-    }
-    
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    
-    do{
-        // Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
-        glClear( GL_COLOR_BUFFER_BIT );
-        
-        // Draw nothing, see you in tutorial 2 !
-        
-        // Swap buffers
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-        
-    } // Check if the ESC key was pressed or the window was closed
-    while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-          glfwWindowShouldClose(window) == 0 );
-    
+
+
+  if (argc > 4 && strcmp(argv[2],"nogl") == 0) {
+    app.init();
+    app.set_gl(false);
+    app.resize(stoi(argv[3]), stoi(argv[4]));
+    app.write_framebuffer();
+    return 0;
+  }
+
+  // create viewer
+  Viewer viewer = Viewer();
+
+  // set renderer
+  viewer.set_renderer(&app);
+
+  // init viewer
+  viewer.init();
+
+  // start viewer
+  viewer.start();
+
+  exit(EXIT_SUCCESS);
+
+  return 0;
+
 }
+
+//int main() {
+//    glewExperimental = true; // Needed for core profile
+//    if( !glfwInit() )
+//    {
+//        fprintf( stderr, "Failed to initialize GLFW\n" );
+//        return -1;
+//    }
+//
+//    glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+//    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
+//    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+//    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+//    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL
+//
+//    // Open a window and create its OpenGL context
+//    GLFWwindow* window; // (In the accompanying source code, this variable is global for simplicity)
+//    window = glfwCreateWindow( 1024, 768, "Basic Box", NULL, NULL);
+//    if( window == NULL ){
+//        fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+//        glfwTerminate();
+//        return -1;
+//    }
+//    glfwMakeContextCurrent(window); // Initialize GLEW
+//    glewExperimental=true; // Needed in core profile
+//    if (glewInit() != GLEW_OK) {
+//        fprintf(stderr, "Failed to initialize GLEW\n");
+//        return -1;
+//    }
+//
+//    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+//
+//    do{
+//        // Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
+//        glClear( GL_COLOR_BUFFER_BIT );
+//
+//        // Draw nothing, see you in tutorial 2 !
+//
+//
+//        // Swap buffers
+//        glfwSwapBuffers(window);
+//        glfwPollEvents();
+//
+//    } // Check if the ESC key was pressed or the window was closed
+//    while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
+//          glfwWindowShouldClose(window) == 0 );
+//
+//}

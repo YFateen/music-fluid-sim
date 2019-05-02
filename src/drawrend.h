@@ -8,16 +8,17 @@
 #include <cstring>
 #include "GLFW/glfw3.h"
 #include "svg.h"
+#include "particle.h"
 
 namespace CGL {
 
 class DrawRend : public Renderer {
  public:
-  DrawRend(std::vector<SVG*> svgs_):
-  svgs(svgs_), current_svg(0)
+  DrawRend(int audio_rate, std::vector<int> audio_magnitude):
+      audio_rate(audio_rate), audio_magnitude(audio_magnitude)
   {}
 
-  ~DrawRend( void );
+  ~DrawRend();
 
   // inherited Renderer interface functions
   void init();
@@ -43,6 +44,8 @@ class DrawRend : public Renderer {
   void draw_pixels();
   void draw_zoom();
 
+  void particles_init();
+
   // view transform functions
   void view_init();
   void set_view(float x, float y, float span);
@@ -56,17 +59,32 @@ class DrawRend : public Renderer {
                        float x1, float y1,
                        Color color);
 
+  // rasterize a square
+  void rasterize_square(float x, float y,
+                        float size, Color color);
+    
+  // rasterize a circle
+  void rasterize_circle(float x, float y,
+                   float size, Color color);
+    
+  // circle_draw helper method
+    void circle_draw_helper(int xCoordinate, int yCoordinate,
+                            int tempX, int tempY,
+                            Color color);
+
   // rasterize a triangle
   void rasterize_triangle( float x0, float y0,
                            float x1, float y1,
                            float x2, float y2,
                            Color color, Triangle *tri = NULL );
 
+  void rasterize_particle(Particle *particle);
 
 
 private:
   // Global state variables for SVGs, pixels, and view transforms
-  std::vector<SVG*> svgs; size_t current_svg;
+//  std::vector<SVG*> svgs; size_t current_svg;
+  std::vector<Particle> particles;
   std::vector<Matrix3x3> svg_to_ndc;
   float view_x, view_y, view_span;
 
@@ -80,6 +98,10 @@ private:
   bool left_clicked;
   int show_zoom;
   int sample_rate;
+
+  // Audio
+  int audio_rate;
+  std::vector<int> audio_magnitude;
 
   PixelSampleMethod psm;
   LevelSampleMethod lsm;
@@ -101,15 +123,12 @@ private:
     // Fill the subpixel at i,j with the Color c
     void fill_color(int i, int j, Color c) {
       PixelColorStorage &p = sub_pixels[i][j];
-        p[0] = c.r * 255;
-        p[1] = c.g * 255;
-        p[2] = c.b * 255;
       // Part 1: Overwrite PixelColorStorage p using Color c.
       //         Pay attention to different data types.
       //
       // I need to figure out how PixelColorStorage is structured, and transform the
       // the value for RGB to byte representation.
-      return;
+      for (int k = 0; k < 3; k++) p[k] = (unsigned char) (c[k] * 255);
     }
 
     void fill_pixel(Color c) {

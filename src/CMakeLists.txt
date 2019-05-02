@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 
 # Application source
 set(APPLICATION_SOURCE
-    
+        particle.cpp
     texture.cpp
     triangulation.cpp
     svgparser.cpp
@@ -14,6 +14,7 @@ set(APPLICATION_SOURCE
     svg.cpp
     main.cpp
     # Add headers for the sake of Xcode/Visual Studio projects
+        particle.h
     drawrend.h
     svg.h
     svgparser.h
@@ -76,4 +77,9 @@ endif(APPLE)
 set(EXECUTABLE_OUTPUT_PATH ..)
 
 # Install to project root
-install(TARGETS draw DESTINATION ${Assignment1_SOURCE_DIR})
+INSTALL( 
+
+     TARGETS draw
+     RUNTIME DESTINATION bin
+     DESTINATION "${Assignment1_SOURCE_DIR}" 
+)
