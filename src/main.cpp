@@ -10,6 +10,9 @@
 // typedef uint32_t gid_t;
 #include <iostream>
 
+#include <stdio.h>
+#include <string.h>
+
 #include "svg.h"
 #include "drawrend.h"
 #include "transforms.h"
@@ -101,6 +104,12 @@ vector<SVG*> loadPath( const char* path ) {
   return vector<SVG*>();
 }
 
+void start_audio(const char* path) {
+  // macOS's AVAudioPlayer is probably the move here, but I spent 3 hours trying to play audio properly.
+  // Obviously this does not work on Windows, but otherwise has no functional drawbacks
+  system(("afplay " + string(path) + " &").c_str());
+  atexit([] () {system("killall afplay");});
+}
 
 int main( int argc, char** argv ) {
 //  if (argc < 2) {
@@ -122,6 +131,8 @@ int main( int argc, char** argv ) {
   for (int i = 500; i < 1000; i++) {
     audio_signal[i] = 1000 - i;
   }
+
+//  start_audio("/Users/brianlevis/cs182/audio-upsampling/data/wav_11025/000002.wav");
 
   // create application
   DrawRend app(sample_rate, audio_signal);
