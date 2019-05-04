@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctime>
 
 #include "svg.h"
 #include "drawrend.h"
@@ -24,6 +25,7 @@ using namespace CGL;
 
 #define msg(s) cerr << "[Drawer] " << s << endl;
 
+long start;
 
 SVG *loadFile( const char* path ) {
 
@@ -105,8 +107,9 @@ vector<SVG*> loadPath( const char* path ) {
 }
 
 void start_audio(const char* path) {
-  // macOS's AVAudioPlayer is probably the move here, but I spent 3 hours trying to play audio properly.
-  // Obviously this does not work on Windows, but otherwise has no functional drawbacks
+  // macOS's AVAudioPlayer is probably the move here, but I spent 3 hours trying to install/use
+  // random audio libraries. Obviously this does not work on Windows, but otherwise has few
+  // functional drawbacks
   system(("afplay " + string(path) + " &").c_str());
   atexit([] () {system("killall afplay");});
 }
@@ -133,6 +136,9 @@ int main( int argc, char** argv ) {
   }
 
 //  start_audio("/Users/brianlevis/cs182/audio-upsampling/data/wav_11025/000002.wav");
+  struct timespec ts;
+  clock_gettime(CLOCK_REALTIME, &ts);
+  start = ts.tv_sec;
 
   // create application
   DrawRend app(sample_rate, audio_signal);

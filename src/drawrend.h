@@ -1,3 +1,5 @@
+#include <utility>
+
 #ifndef CGL_DRAWREND_H
 #define CGL_DRAWREND_H
 
@@ -10,19 +12,21 @@
 #include "svg.h"
 #include "particle.h"
 
+long start;
+
 namespace CGL {
 
 class DrawRend : public Renderer {
  public:
   DrawRend(int audio_rate, std::vector<int> audio_magnitude):
-      audio_rate(audio_rate), audio_magnitude(audio_magnitude)
+      audio_rate(audio_rate), audio_magnitude(std::move(audio_magnitude))
   {}
 
-  ~DrawRend();
+  ~DrawRend() override;
 
   // inherited Renderer interface functions
-  void init();
-  void render();
+  void init() override;
+  void render() override;
   void resize( size_t w, size_t h );
   std::string name() { return "Draw"; }
   std::string info();

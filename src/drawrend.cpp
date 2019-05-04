@@ -16,7 +16,7 @@ namespace CGL {
 struct SVG;
 
 
-DrawRend::~DrawRend(void) {}
+DrawRend::~DrawRend() {}
 
 /**
 * Initialize the renderer.
@@ -46,6 +46,12 @@ void DrawRend::init() {
 * Simply reposts the framebuffer and the zoom window, if applicable.
 */
 void DrawRend::render() {
+  struct timespec now;
+  clock_gettime(CLOCK_MONOTONIC, &now);
+  float t = (now.tv_sec - start) / 1e-9;
+  // Bring particle simulation up to date
+
+  // Render a frame if the particles were updated
   for (Particle &p : particles) {
     rasterize_particle(&p);
   }

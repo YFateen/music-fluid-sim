@@ -11,49 +11,57 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <list>
 #include <iostream>
 
 #include "CGL/vector2D.h"
 #include "CGL/color.h"
 
-namespace CGL{ 
+using namespace CGL;
+using namespace std;
+
 
 class Particle {
-private:
-  // X and Y coordinate in integer land. [x, y]
-  Vector2D pPosition;
-
-  // Velocity in both directions [Vx, Vy]
-  Vector2D pVelocity;
-
-  // Acceleration in both directions [Ax, Ay]
-  Vector2D pAcceleration;
-
-  double pRadius{};
-
-  // Color for range in 0-255 [R, G, B]
-  Color pColor;
-
 public:
   // Class constructers
-  explicit Particle(const Vector2D &position) :
-      pPosition(position), pRadius(1.0), pVelocity({0, 0}), pAcceleration(), pColor() {}
+  explicit Particle(const Vector2D &position, double radius) :
+                    position(position), radius(radius), velocity({0, 0}), acceleration(), color() {
+  }
 
-  Particle(const Vector2D &position, double radius, const Vector2D& acceleration, const Vector2D& velocity,
+  Particle(const Vector2D &position, double radius, const Vector2D &acceleration, const Vector2D &velocity,
            const Color color) :
-      pPosition(position), pRadius(radius), pVelocity(velocity), pAcceleration(acceleration), pColor(color) {}
+           position(position), radius(radius), velocity(velocity), acceleration(acceleration), color(color) {
+  }
 
-  //Get helpers
-  Vector2D getPosition() { return pPosition; }
+  // Dynamic properties
+  Vector2D position;
+  Vector2D velocity;
+  Vector2D acceleration;
 
-  Vector2D getVelocity() { return pVelocity; }
+  double radius;
 
-  Vector2D getAcceleration() { return pAcceleration; }
-
-  double getRadius() { return pRadius; }
-
-  Color getColor() { return pColor; }
+  Color color;
 };
-}
+
+class ParticleGrid {
+public:
+  ParticleGrid(int height, int width, float interaction_radius, float dt) :
+               height(height), width(width), interaction_radius(interaction_radius), dt(dt) {
+  }
+
+  void interact_particles();
+
+private:
+  const int height;
+  const int width;
+  const float interaction_radius;
+
+  float dt;
+
+  list<Particle> particles;
+  vector<vector<Particle *>> grid;
+
+  void interact(Particle &particle, Particle &neighbor);
+};
 
 #endif /* particle_hpp */
