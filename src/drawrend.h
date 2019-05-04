@@ -12,7 +12,7 @@
 #include "svg.h"
 #include "particle.h"
 
-long start;
+extern long start;
 
 namespace CGL {
 
@@ -27,13 +27,13 @@ class DrawRend : public Renderer {
   // inherited Renderer interface functions
   void init() override;
   void render() override;
-  void resize( size_t w, size_t h );
-  std::string name() { return "Draw"; }
-  std::string info();
-  void cursor_event( float x, float y );
-  void scroll_event( float offset_x, float offset_y );
-  void mouse_event( int key, int event, unsigned char mods );
-  void keyboard_event( int key, int event, unsigned char mods );
+  void resize( size_t w, size_t h ) override;
+  std::string name() override { return "Draw"; }
+  std::string info() override;
+  void cursor_event( float x, float y ) override;
+  void scroll_event( float offset_x, float offset_y ) override;
+  void mouse_event( int key, int event, unsigned char mods ) override;
+  void keyboard_event( int key, int event, unsigned char mods ) override;
 
   void set_gl(bool gl_) { gl = gl_; }
 
@@ -80,7 +80,7 @@ class DrawRend : public Renderer {
   void rasterize_triangle( float x0, float y0,
                            float x1, float y1,
                            float x2, float y2,
-                           Color color, Triangle *tri = NULL );
+                           Color color, Triangle *tri = nullptr );
 
   void rasterize_particle(Particle *particle);
 
