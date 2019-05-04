@@ -64,7 +64,17 @@ class DrawRend : public Renderer {
                        Color color);
 
   // rasterize a square
-  void rasterize_square(float x, float y, float size, Color color);
+  void rasterize_square(float x, float y,
+                        float size, Color color);
+    
+  // rasterize a circle
+  void rasterize_circle(float x, float y,
+                   float size, Color color);
+    
+  // circle_draw helper method
+    void circle_draw_helper(int xCoordinate, int yCoordinate,
+                            int tempX, int tempY,
+                            Color color);
 
   // rasterize a triangle
   void rasterize_triangle( float x0, float y0,

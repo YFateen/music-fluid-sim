@@ -77,4 +77,9 @@ endif(APPLE)
 set(EXECUTABLE_OUTPUT_PATH ..)
 
 # Install to project root
-install(TARGETS draw DESTINATION ${Assignment1_SOURCE_DIR})
+INSTALL( 
+
+     TARGETS draw
+     RUNTIME DESTINATION bin
+     DESTINATION "${Assignment1_SOURCE_DIR}" 
+)

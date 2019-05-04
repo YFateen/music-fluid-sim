@@ -140,6 +140,8 @@ int main( int argc, char** argv ) {
   clock_gettime(CLOCK_REALTIME, &ts);
   start = ts.tv_sec;
 
+    int debug = 0;
+    
   // create application
   DrawRend app(sample_rate, audio_signal);
 
