@@ -18,7 +18,7 @@ namespace CGL {
 
 class DrawRend : public Renderer {
  public:
-  DrawRend(int audio_rate, std::vector<int> audio_magnitude):
+  DrawRend(int audio_rate, std::vector<uint8_t> audio_magnitude):
       audio_rate(audio_rate), audio_magnitude(std::move(audio_magnitude)), grid(50, 1.0/audio_rate){
   }
 
@@ -105,7 +105,7 @@ private:
 
   // Audio
   int audio_rate;
-  std::vector<int> audio_magnitude;
+  std::vector<uint8_t> audio_magnitude;
 
   PixelSampleMethod psm;
   LevelSampleMethod lsm;

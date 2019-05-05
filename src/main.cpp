@@ -107,7 +107,7 @@ vector<SVG*> loadPath( const char* path ) {
   return vector<SVG*>();
 }
 
-void start_audio(const char* path) {
+void start_audio(const char* path, int* sample_rate, vector<uint8_t>* signal) {
   // macOS's AVAudioPlayer is probably the move here, but I spent 3 hours trying to install/use
   // random audio libraries. Obviously this does not work on Windows, but otherwise has few
   // functional drawbacks
@@ -115,8 +115,10 @@ void start_audio(const char* path) {
   char *answer = getcwd(buffer, sizeof(buffer));
   string cwd;
   if (answer) cwd = answer;
-  cout << "afplay " + cwd + "/../" + string(path) + " &" << endl;
-  system(("afplay " + cwd + "/../" + string(path) + " &").c_str());
+  string full_path = "afplay " + cwd + "/../" + string(path) + " &";
+  // Load signal into memory
+
+  system(full_path.c_str());
   atexit([] () {system("killall afplay");});
 }
 
@@ -133,15 +135,14 @@ int main( int argc, char** argv ) {
 //  }
   // Placeholder inputs
   int sample_rate = 2;
-  std::vector<int> audio_signal(1000);
-  for (int i = 0; i < 500; i++) {
+  std::vector<uint8_t> audio_signal(255*2);
+  for (int i = 0; i < 255; i++) {
     audio_signal[i] = i;
   }
-  for (int i = 500; i < 1000; i++) {
-    audio_signal[i] = 1000 - i;
+  for (int i = 255; i < 255*2; i++) {
+    audio_signal[i] = 255*2 - i;
   }
-
-  start_audio("res/test_song/test_song.mp3");
+  start_audio("res/test_song/test_song.mp3", &sample_rate, &audio_signal);
 //  start_audio("res/test_song/test_song_8b_1000Hz.wav");
   struct timespec ts{};
   clock_gettime(CLOCK_MONOTONIC, &ts);
