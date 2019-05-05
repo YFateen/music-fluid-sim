@@ -19,8 +19,8 @@ namespace CGL {
 class DrawRend : public Renderer {
  public:
   DrawRend(int audio_rate, std::vector<int> audio_magnitude):
-      audio_rate(audio_rate), audio_magnitude(std::move(audio_magnitude))
-  {}
+      audio_rate(audio_rate), audio_magnitude(std::move(audio_magnitude)), grid(50, 1.0/audio_rate){
+  }
 
   ~DrawRend() override;
 
@@ -82,13 +82,13 @@ class DrawRend : public Renderer {
                            float x2, float y2,
                            Color color, Triangle *tri = nullptr );
 
-  void rasterize_particle(Particle *particle);
+  void rasterize_particle(const Particle &particle);
 
 
 private:
   // Global state variables for SVGs, pixels, and view transforms
 //  std::vector<SVG*> svgs; size_t current_svg;
-  std::vector<Particle> particles;
+  ParticleGrid grid;
   std::vector<Matrix3x3> svg_to_ndc;
   float view_x, view_y, view_span;
 

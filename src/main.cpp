@@ -126,7 +126,7 @@ int main( int argc, char** argv ) {
 //    return 0;
 //  }
   // Placeholder inputs
-  int sample_rate = 10;
+  int sample_rate = 2;
   std::vector<int> audio_signal(1000);
   for (int i = 0; i < 500; i++) {
     audio_signal[i] = i;
@@ -135,9 +135,10 @@ int main( int argc, char** argv ) {
     audio_signal[i] = 1000 - i;
   }
 
-//  start_audio("/Users/brianlevis/cs182/audio-upsampling/data/wav_11025/000002.wav");
-  struct timespec ts;
-  clock_gettime(CLOCK_REALTIME, &ts);
+//  start_audio("res/test_song/test_song.mp3");
+//  start_audio("res/test_song/test_song_8b_1000Hz.wav");
+  struct timespec ts{};
+  clock_gettime(CLOCK_MONOTONIC, &ts);
   start = ts.tv_sec;
 
     int debug = 0;

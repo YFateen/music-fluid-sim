@@ -49,17 +49,20 @@ namespace CGL {
 * Simply reposts the framebuffer and the zoom window, if applicable.
 */
   void DrawRend::render() {
-    struct timespec now;
+    struct timespec now{};
     clock_gettime(CLOCK_MONOTONIC, &now);
     float t = (now.tv_sec - start) / 1e-9;
-    // Bring particle simulation up to date
-
-    // Render a frame if the particles were updated
-    for (Particle &p : particles) {
-      rasterize_particle(&p);
+    // Check if it is time to render/update
+    if (grid.t < t) {
+      // Render a frame
+      for (const Particle &p : *grid.get_particles()) {
+        rasterize_particle(p);
+      }
+      draw_pixels();
+      resolve();
+      // Bring particle simulation up to date
+      grid.update_particles();
     }
-    draw_pixels();
-    resolve();
 //  if (show_zoom)
 //    draw_zoom();
   }
@@ -76,6 +79,7 @@ namespace CGL {
     height = h;
 
     framebuffer.resize(4 * w * h);
+    grid.resize(w, h);
 
     samplebuffer.clear();
     vector<SampleBuffer> samplebuffer_row(width, SampleBuffer(sqrt(sample_rate)));
@@ -573,14 +577,14 @@ namespace CGL {
 
   }
 
-  void DrawRend::rasterize_particle(Particle *particle) {
+  void DrawRend::rasterize_particle(const Particle &particle) {
     // Draw a "circle" centered at x, y
-    float xCoordinate = particle->position.x;
-    float yCoordinate = particle->position.y;
-    float radius = particle->radius;
+    float xCoordinate = particle.position.x;
+    float yCoordinate = particle.position.y;
+    float radius = particle.radius;
 
 //  rasterize_square(x - radius, y - radius, radius * 2, particle->getColor());
-    rasterize_circle(xCoordinate, yCoordinate, radius, particle->color);
+    rasterize_circle(xCoordinate, yCoordinate, radius, particle.color);
   }
 
 // Rasterize a triangle.
@@ -608,37 +612,37 @@ namespace CGL {
   }
 
   void DrawRend::particles_init() {
-    particles.emplace_back(
-        Vector2D(200, 200), 50, Vector2D(), Vector2D(),
-        Color(1.0, 0.2, 1.0));
+    grid.add(Particle(
+        {200, 200}, 5, 0.01, {10, 10}, {},
+        {1.0, 0.2, 1.0}));
 
-    particles.emplace_back(
-        Vector2D(200, 200), 50, Vector2D(), Vector2D(),
-        Color(1.0, 0.2, 1.0));
+    grid.add(Particle(
+        Vector2D(200, 200), 5, 0.01, Vector2D(), {},
+        Color(1.0, 0.2, 1.0)));
 
-    particles.emplace_back(
-        Vector2D(400, 400), 75, Vector2D(), Vector2D(),
-        Color(.3, 0.2, 1.0));
+    grid.add(Particle(
+        Vector2D(400, 400), 8, 0.01, Vector2D(), Vector2D(),
+        Color(.3, 0.2, 1.0)));
 
-    particles.emplace_back(
-        Vector2D(700, 200), 20, Vector2D(), Vector2D(),
-        Color(.9, 0.2, .01));
+    grid.add(Particle(
+        Vector2D(700, 200), 3, 0.01, Vector2D(), Vector2D(),
+        Color(.9, 0.2, .01)));
 
-    particles.emplace_back(
-        Vector2D(350, 600), 20, Vector2D(), Vector2D(),
-        Color(.2, 0.2, .91));
+    grid.add(Particle(
+        Vector2D(350, 600), 3, 0.01, Vector2D(), Vector2D(),
+        Color(.2, 0.2, .91)));
 
-    particles.emplace_back(
-        Vector2D(150, 500), 40, Vector2D(), Vector2D(),
-        Color(.1, 0.2, .42));
+    grid.add(Particle(
+        Vector2D(150, 500), 5, 0.01, Vector2D(), Vector2D(),
+        Color(.1, 0.2, .42)));
 
-    particles.emplace_back(
-        Vector2D(300, 200), 30, Vector2D(), Vector2D(),
-        Color(.9, 0.1, .87));
+    grid.add(Particle(
+        Vector2D(300, 200), 3, 0.01, Vector2D(), Vector2D(),
+        Color(.9, 0.1, .87)));
 
-    particles.emplace_back(
-        Vector2D(700, 500), 10, Vector2D(), Vector2D(),
-        Color(.3, 0.7, 1.0));
+    grid.add(Particle(
+        Vector2D(700, 500), 10, 0.01, Vector2D(), Vector2D(),
+        Color(.3, 0.7, 1.0)));
 
 
   }

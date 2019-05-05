@@ -17,44 +17,62 @@
 #include "CGL/vector2D.h"
 #include "CGL/color.h"
 
+#define density 0.0005
+//#define mass    0.01
+#define cutoff  0.01
+#define min_r   (cutoff/100)
+//#define dt      0.0005
+
 using namespace CGL;
 using namespace std;
 
 
 class Particle {
 public:
-  // Class constructers
-  explicit Particle(const Vector2D &position, double radius) :
-                    position(position), radius(radius), velocity({0, 0}), acceleration(), color() {
+  explicit Particle(const Vector2D &position) :
+                    position(position), radius(1.0), mass(1.0), velocity({0, 0}), acceleration(), color() {
   }
 
-  Particle(const Vector2D &position, double radius, const Vector2D &acceleration, const Vector2D &velocity,
+  Particle(const Vector2D &position, double radius, double mass, const Vector2D &velocity, const Vector2D &acceleration,
            const Color color) :
-           position(position), radius(radius), velocity(velocity), acceleration(acceleration), color(color) {
+           position(position), radius(radius), mass(mass), velocity(velocity), acceleration(acceleration), color(color) {
   }
 
-  // Dynamic properties
   Vector2D position;
   Vector2D velocity;
   Vector2D acceleration;
 
   double radius;
+  double mass;
 
   Color color;
 };
 
 class ParticleGrid {
 public:
-  ParticleGrid(int height, int width, float interaction_radius, float dt) :
-               height(height), width(width), interaction_radius(interaction_radius), dt(dt) {
+  float t = 0;
+
+  ParticleGrid(float interaction_radius, float dt) :
+               interaction_radius(interaction_radius), dt(dt) {
   }
 
-  void interact_particles();
+  void resize(size_t w, size_t h) {
+    width = w;
+    height = h;
+  };
+
+  void add(const Particle& particle);
+
+  const list<Particle>* get_particles() {
+    return &particles;
+  }
+
+  void update_particles();
 
 private:
-  const int height;
-  const int width;
-  const float interaction_radius;
+  size_t width;
+  size_t height;
+  float interaction_radius;
 
   float dt;
 
@@ -62,6 +80,7 @@ private:
   vector<vector<Particle *>> grid;
 
   void interact(Particle &particle, Particle &neighbor);
+  void move(Particle &particle);
 };
 
 #endif /* particle_hpp */
