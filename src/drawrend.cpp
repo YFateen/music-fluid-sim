@@ -54,17 +54,12 @@ namespace CGL {
     float t = (now.tv_sec - start) / 1e-9;
     // Check if it is time to render/update
     if (grid.t < t) {
-      // Render a frame
+      redraw();
+      grid.update_particles();
       for (const Particle &p : *grid.get_particles()) {
         rasterize_particle(p);
       }
-      draw_pixels();
-      resolve();
-      // Bring particle simulation up to date
-      grid.update_particles();
     }
-//  if (show_zoom)
-//    draw_zoom();
   }
 
 /**
@@ -320,10 +315,6 @@ namespace CGL {
 * into the framebuffer before posting the framebuffer pixels to the screen.
 */
   void DrawRend::redraw() {
-    for (int i = 0; i < samplebuffer.size(); ++i)
-      for (int j = 0; j < samplebuffer[i].size(); ++j)
-        samplebuffer[i][j].clear();
-
 //  SVG &svg = *svgs[current_svg];
 //  svg.draw(this, ndc_to_screen*svg_to_ndc[current_svg]);
 //
@@ -341,6 +332,9 @@ namespace CGL {
     resolve();
     if (gl)
       draw_pixels();
+    for (int i = 0; i < samplebuffer.size(); ++i)
+      for (int j = 0; j < samplebuffer[i].size(); ++j)
+        samplebuffer[i][j].clear();
   }
 
 /**
@@ -612,7 +606,7 @@ namespace CGL {
   }
 
   void DrawRend::particles_init() {
-    grid.add(Particle({200, 200}, 5, 0.01, {10, 10}, {}, {1.0, 0.2, 1.0}));
+    grid.add(Particle({200, 200}, 5, 0.01, {5, 5}, {}, {1.0, 0.2, 1.0}));
     grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}));
     grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}));
     grid.add(Particle({700, 200}, 3, 0.01, {}, {},{.9, 0.2, .01}));

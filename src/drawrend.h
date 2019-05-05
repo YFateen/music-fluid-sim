@@ -166,7 +166,7 @@ private:
     }
   };
 
-  std::vector<std::vector<SampleBuffer> > samplebuffer;
+  std::vector<std::vector<SampleBuffer>> samplebuffer;
 
   // This function takes the collected sub-pixel samples and
   // combines them together to fill in the framebuffer in preparation

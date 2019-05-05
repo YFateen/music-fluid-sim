@@ -10,6 +10,7 @@
 // typedef uint32_t gid_t;
 #include <iostream>
 
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctime>
@@ -110,7 +111,12 @@ void start_audio(const char* path) {
   // macOS's AVAudioPlayer is probably the move here, but I spent 3 hours trying to install/use
   // random audio libraries. Obviously this does not work on Windows, but otherwise has few
   // functional drawbacks
-  system(("afplay " + string(path) + " &").c_str());
+  char buffer[1024];
+  char *answer = getcwd(buffer, sizeof(buffer));
+  string cwd;
+  if (answer) cwd = answer;
+  cout << "afplay " + cwd + "/../" + string(path) + " &" << endl;
+  system(("afplay " + cwd + "/../" + string(path) + " &").c_str());
   atexit([] () {system("killall afplay");});
 }
 
@@ -135,7 +141,7 @@ int main( int argc, char** argv ) {
     audio_signal[i] = 1000 - i;
   }
 
-//  start_audio("res/test_song/test_song.mp3");
+  start_audio("res/test_song/test_song.mp3");
 //  start_audio("res/test_song/test_song_8b_1000Hz.wav");
   struct timespec ts{};
   clock_gettime(CLOCK_MONOTONIC, &ts);
