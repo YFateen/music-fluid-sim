@@ -612,39 +612,14 @@ namespace CGL {
   }
 
   void DrawRend::particles_init() {
-    grid.add(Particle(
-        {200, 200}, 5, 0.01, {10, 10}, {},
-        {1.0, 0.2, 1.0}));
-
-    grid.add(Particle(
-        Vector2D(200, 200), 5, 0.01, Vector2D(), {},
-        Color(1.0, 0.2, 1.0)));
-
-    grid.add(Particle(
-        Vector2D(400, 400), 8, 0.01, Vector2D(), Vector2D(),
-        Color(.3, 0.2, 1.0)));
-
-    grid.add(Particle(
-        Vector2D(700, 200), 3, 0.01, Vector2D(), Vector2D(),
-        Color(.9, 0.2, .01)));
-
-    grid.add(Particle(
-        Vector2D(350, 600), 3, 0.01, Vector2D(), Vector2D(),
-        Color(.2, 0.2, .91)));
-
-    grid.add(Particle(
-        Vector2D(150, 500), 5, 0.01, Vector2D(), Vector2D(),
-        Color(.1, 0.2, .42)));
-
-    grid.add(Particle(
-        Vector2D(300, 200), 3, 0.01, Vector2D(), Vector2D(),
-        Color(.9, 0.1, .87)));
-
-    grid.add(Particle(
-        Vector2D(700, 500), 10, 0.01, Vector2D(), Vector2D(),
-        Color(.3, 0.7, 1.0)));
-
-
+    grid.add(Particle({200, 200}, 5, 0.01, {10, 10}, {}, {1.0, 0.2, 1.0}));
+    grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}));
+    grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}));
+    grid.add(Particle({700, 200}, 3, 0.01, {}, {},{.9, 0.2, .01}));
+    grid.add(Particle({350, 600}, 3, 0.01, {}, {},{.2, 0.2, .91}));
+    grid.add(Particle({150, 500}, 5, 0.01, {}, {},{.1, 0.2, .42}));
+    grid.add(Particle({300, 200}, 3, 0.01, {}, {},{.9, 0.1, .87}));
+    grid.add(Particle({700, 500}, 10, 0.01, {}, {},{.3, 0.7, 1.0}));
   }
 
 }
