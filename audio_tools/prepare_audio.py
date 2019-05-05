@@ -1,10 +1,6 @@
 from scipy.io import wavfile
-from scipy import signal
-import six
 import numpy as np
 import librosa
-import os
-from subprocess import call
 
 
 DTYPE_RANGES = {
@@ -15,9 +11,11 @@ BITS_TO_DTYPE = {
     64: np.dtype('float32'), 32: np.dtype('int32'), 16: np.dtype('int16'), 8: np.dtype('uint8')
 }
 
-def downsample_audio_file(input_filename, output_filename, sample_rate, bits_per_sample):
-    # Downsample and save (librosa supports only 16-bits)
+
+def encode_audio_file(input_filename, output_filename, sample_rate=10, bits_per_sample=8):
+    # Downsample and save (librosa supports only 16-bits and scipy.resample is slow af)
     y, sr = librosa.core.load(input_filename, sr=sample_rate, mono=True)
+    # Not necessary but me lazy
     librosa.output.write_wav(output_filename, y, sr)
     # Reduce bitrate of audio
     fs, audio = wavfile.read(output_filename)
@@ -28,4 +26,11 @@ def downsample_audio_file(input_filename, output_filename, sample_rate, bits_per
             (audio - current_range[0]) / (current_range[1] - current_range[0]) *
             (new_range[1] - new_range[0]) + new_range[0]
         ).astype(new_dtype)
-    wavfile.write(output_filename, fs, audio)
+    # Write file encoded as such:
+    # 4B: sample rate
+    # 4B: magnitude length = X
+    # XB: wav data
+    with open(output_filename, 'wb') as fp:
+        fp.write(fs.to_bytes(4, "big"))
+        fp.write(len(audio).to_bytes(4, "big"))
+        fp.write(bytes(audio))
