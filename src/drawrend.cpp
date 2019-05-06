@@ -580,9 +580,9 @@ namespace CGL {
     float xCoordinate = particle.position.x;
     float yCoordinate = particle.position.y;
     float radius = particle.radius;
-    float multiplier = min(1.0, particle.velocity.norm() / 100);
+    float multiplier = min(1.0, particle.velocity.norm() / 500);
     Color color = particle.color * multiplier + Color(1, 1, 1) * (1.0 - multiplier);
-  rasterize_square(xCoordinate - radius, yCoordinate - radius, radius * 2, color);
+    rasterize_circle(xCoordinate - radius, yCoordinate - radius, radius * 2, color);
 //    rasterize_circle(xCoordinate, yCoordinate, radius, particle.color);
   }
 
@@ -611,14 +611,13 @@ namespace CGL {
   }
 
   void DrawRend::particles_init() {
-    grid.add(Particle({200, 200}, 5, 0.01, {5, 5}, {}, {1.0, 0.2, 1.0}));
     grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}));
     grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}));
     grid.add(Particle({700, 200}, 3, 0.01, {}, {},{.9, 0.2, .01}));
-    grid.add(Particle({350, 600}, 3, 0.01, {}, {},{.2, 0.2, .91}));
+    grid.add(Particle({350, 600}, 30, 0.01, {5, 5}, {},{.2, 0.2, .91}));
     grid.add(Particle({150, 500}, 5, 0.01, {}, {},{.1, 0.2, .42}));
     grid.add(Particle({300, 200}, 3, 0.01, {}, {},{.9, 0.1, .87}));
-    grid.add(Particle({700, 500}, 10, 0.01, {}, {},{.3, 0.7, 1.0}));
+    grid.add(Particle({600, 400}, 10, 0.01, {}, {},{.3, 0.7, 1.0}));
   }
 
 }
