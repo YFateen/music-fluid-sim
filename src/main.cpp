@@ -144,6 +144,7 @@ int main( int argc, char** argv ) {
   if (argc < 3) {
     msg("Usage: ./draw <audio file> <data file>")
     msg("Example: ./draw res/test_song/test_song.mp3 res/test_song/test_song_8b_10Hz")
+    msg("Note: Use audio_tools/prepare_audio.py to generate new files")
     return 0;
   }
 

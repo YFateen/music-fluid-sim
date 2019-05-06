@@ -16,6 +16,8 @@ BITS_TO_DTYPE = {
     64: np.dtype('float32'), 32: np.dtype('int32'), 16: np.dtype('int16'), 8: np.dtype('uint8')
 }
 
+# Example usage:
+# python3 ../../audio_tools/prepare_audio.py test_song.mp3 test_song_8b_5Hz -r 5
 
 parser = argparse.ArgumentParser(description='Create a data file for the Choreographed Particle Simulator')
 parser.add_argument('input_file', type=str, help='audio file path')
