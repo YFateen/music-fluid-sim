@@ -20,7 +20,7 @@
 #define density 0.0005
 //#define mass    0.01
 //#define cutoff  10.0
-#define min_r   1.0
+//#define min_r   10.0
 //#define dt      0.0005
 
 using namespace CGL;
@@ -81,7 +81,7 @@ private:
   vector<vector<Particle *>> grid;
 
   void interact(Particle &particle, Particle &neighbor);
-  void move(Particle &particle);
+  void move(Particle &particle, float multiplier);
 };
 
 #endif /* particle_hpp */

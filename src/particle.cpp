@@ -12,8 +12,7 @@ void ParticleGrid::update_particles(uint8_t audio_magnitude) {
   // Apply some gravity!
   for (Particle &particle : particles) {
     particle.acceleration.y = 1000 * multiplier - 200;
-    particle.velocity = 0.5 * particle.velocity + 1.5 * multiplier * particle.velocity;
-//    particle.color = Color(1.0, 1.0 - multiplier, 1.0 - multiplier);
+    particle.acceleration.x = 100 * multiplier - 20;
   }
   // TODO: optimize this using the grid!!!
   for (Particle &particle : particles) {
@@ -22,7 +21,7 @@ void ParticleGrid::update_particles(uint8_t audio_magnitude) {
     }
   }
   for (Particle &particle : particles) {
-    move(particle);
+    move(particle, multiplier);
   }
   ts++;
 }
@@ -44,7 +43,7 @@ void ParticleGrid::add(const Particle& particle) {
 
 // FOLLOWING IS *PLACEHOLDER* INTERACTION CODE FROM CS 267 HOMEWORK
 
-void ParticleGrid::move(Particle &particle) {
+void ParticleGrid::move(Particle &particle, float multiplier) {
   //
   //
   //  slightly simplified Velocity Verlet integration
@@ -58,39 +57,26 @@ void ParticleGrid::move(Particle &particle) {
   //
   double *x = &(particle.position.x);
   double *y = &(particle.position.y);
-  while(*x < 0 || *x > width)
+  if (*x < particle.radius || *x > width-particle.radius)
   {
-    *x = *x < 0 ? -(*x) : 2*width-(*x);
+    *x = *x < particle.radius ? particle.radius : width-particle.radius;
     particle.velocity.x *= -1;
   }
-  while(*y < 0 || *y > height)
+  if (*y < particle.radius || *y > height-particle.radius)
   {
-    *y = *y < 0 ? -(*y) : 2*height-(*y);
+    *y = *y < particle.radius ? particle.radius : height-particle.radius;
     particle.velocity.y *= -1;
   }
-  *x = max(0.0, min((double) width, *x));
-  *y = max(0.0, min((double) height, *y));
+  *x = max(particle.radius, min((double) (width-particle.radius), *x));
+  *y = max(particle.radius, min((double) (height-particle.radius), *y));
 }
 
 void apply_force(Particle &particle, Particle &neighbor)
 {
   if (&particle == &neighbor) return;
   Vector2D dPosition = neighbor.position - particle.position;
-  double r2 = dPosition.norm2();
-  if( r2 > particle.radius*particle.radius )
-    return;
-//  if (r2 != 0)
-//  {
-//    if (r2/(cutoff*cutoff) < *dmin * (*dmin))
-//      *dmin = sqrt(r2)/cutoff;
-//    (*davg) += sqrt(r2)/cutoff;
-//    (*navg) ++;
-//  }
-  r2 = fmax( r2, min_r*min_r );
-  double r = sqrt( r2 );
-  //
-  //  very simple short-range repulsive force
-  //
-  double coef = ( 1 - particle.radius / r ) / r2 / particle.mass;
-  particle.acceleration += coef * dPosition;
+  particle.acceleration -= 0.00000001 * dPosition.unit() * dPosition.norm2() / particle.mass;
+  if (dPosition.norm() < particle.radius + neighbor.radius) {
+    particle.velocity = -1 * dPosition;
+  }
 }
