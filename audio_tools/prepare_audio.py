@@ -8,8 +8,9 @@ from scipy.signal import resample
 
 
 DTYPE_RANGES = {
-    np.dtype('float32'): (-1.0, 1.0), np.dtype('int32'): (-2147483648, 2147483647), 
-    np.dtype('int16'): (-32768, 32767), np.dtype('uint8'): (0, 255)
+    np.dtype('float32'): (0.0, 1.0), np.dtype('uint8'): (0, 255)
+    # np.dtype('float32'): (-1.0, 1.0), np.dtype('int32'): (-2147483648, 2147483647),
+    # np.dtype('int16'): (-32768, 32767), np.dtype('uint8'): (0, 255)
 }
 BITS_TO_DTYPE = {
     64: np.dtype('float32'), 32: np.dtype('int32'), 16: np.dtype('int16'), 8: np.dtype('uint8')
@@ -27,7 +28,8 @@ args = parser.parse_args()
 def load_resampled_audio(input_filename, sample_rate):
     audio, fs = librosa.core.load(input_filename, sr=None)
     # fs, audio = wavfile.read(input_filename)
-    return sample_rate, resample(audio, len(audio) * sample_rate // fs).astype(np.dtype('float32'))
+    resampled_audio = abs(resample(abs(audio), len(audio) * sample_rate // fs).astype(np.dtype('float32')))
+    return sample_rate, resampled_audio / resampled_audio.max()
 
 
 def encode_audio_file(input_filename, output_filename, sample_rate=10, bits_per_sample=8):
@@ -35,6 +37,7 @@ def encode_audio_file(input_filename, output_filename, sample_rate=10, bits_per_
     # y, sr = librosa.core.load(input_filename, sr=sample_rate, mono=True)
     # Reduce bitrate of audio
     fs, audio = load_resampled_audio(input_filename, sample_rate)
+    print(audio.max())
     new_dtype = BITS_TO_DTYPE[bits_per_sample]
     if new_dtype != audio.dtype:
         current_range, new_range = DTYPE_RANGES[audio.dtype], DTYPE_RANGES[new_dtype]

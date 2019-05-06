@@ -51,15 +51,18 @@ namespace CGL {
   void DrawRend::render() {
     struct timespec now{};
     clock_gettime(CLOCK_MONOTONIC, &now);
-    float t = (now.tv_sec - start) / 1e-9;
+    float t = (now.tv_sec + now.tv_nsec * 1.0e-9) - start;
+    int t_step = int(t * audio_rate);
     // Check if it is time to render/update
-    if (grid.t < t) {
-      redraw();
-      grid.update_particles();
-      for (const Particle &p : *grid.get_particles()) {
-        rasterize_particle(p);
-      }
+    while (grid.ts < t_step) {
+      cout << "tn: " << (now.tv_nsec - start) << " t: " << t << " tstep: " << grid.ts << endl;
+      cout << "lag: " << t_step - grid.ts << endl;
+      grid.update_particles(audio_magnitude[grid.ts]);
     }
+    for (const Particle &p : *grid.get_particles()) {
+      rasterize_particle(p);
+    }
+    redraw();
   }
 
 /**
@@ -70,6 +73,7 @@ namespace CGL {
 * \param h The new height of the context
 */
   void DrawRend::resize(size_t w, size_t h) {
+    cout << "resizing!" << endl;
     width = w;
     height = h;
 
@@ -523,8 +527,8 @@ namespace CGL {
 
 // Rasterize a square.
   void DrawRend::rasterize_square(float x, float y, float size, Color color) {
-    for (int sx = max(0, (int) x); sx < min((int) x, (int) width) + size; sx++) {
-      for (int sy = max(0, (int) y); sy < min((int) y, (int) height) + size; sy++) {
+    for (int sx = max(0, (int) x); sx < min((int) (x + size), (int) width); sx++) {
+      for (int sy = max(0, (int) y); sy < min((int) (y + size), (int) height); sy++) {
         samplebuffer[sy][sx].fill_pixel(color);
       }
     }
@@ -576,9 +580,10 @@ namespace CGL {
     float xCoordinate = particle.position.x;
     float yCoordinate = particle.position.y;
     float radius = particle.radius;
-
-//  rasterize_square(x - radius, y - radius, radius * 2, particle->getColor());
-    rasterize_circle(xCoordinate, yCoordinate, radius, particle.color);
+    float multiplier = min(1.0, particle.velocity.norm() / 100);
+    Color color = particle.color * multiplier + Color(1, 1, 1) * (1.0 - multiplier);
+  rasterize_square(xCoordinate - radius, yCoordinate - radius, radius * 2, color);
+//    rasterize_circle(xCoordinate, yCoordinate, radius, particle.color);
   }
 
 // Rasterize a triangle.

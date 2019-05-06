@@ -6,7 +6,15 @@
 
 #include "particle.h"
 
-void ParticleGrid::update_particles() {
+void ParticleGrid::update_particles(uint8_t audio_magnitude) {
+  float multiplier = audio_magnitude / 255.0;
+  cout << "ts: " << ts << " sig:" << multiplier << endl;
+  // Apply some gravity!
+  for (Particle &particle : particles) {
+    particle.acceleration.y = 1000 * multiplier - 200;
+    particle.velocity = 0.5 * particle.velocity + 1.5 * multiplier * particle.velocity;
+//    particle.color = Color(1.0, 1.0 - multiplier, 1.0 - multiplier);
+  }
   // TODO: optimize this using the grid!!!
   for (Particle &particle : particles) {
     for (Particle &neighbor : particles) {
@@ -16,7 +24,7 @@ void ParticleGrid::update_particles() {
   for (Particle &particle : particles) {
     move(particle);
   }
-  t += dt;
+  ts++;
 }
 
 // Placeholder!!
@@ -41,7 +49,7 @@ void ParticleGrid::move(Particle &particle) {
   //
   //  slightly simplified Velocity Verlet integration
   //  conserves energy better than explicit Euler method
-  //4
+  //
   particle.velocity += particle.acceleration * dt;
   particle.position += particle.velocity * dt;
 
@@ -60,13 +68,16 @@ void ParticleGrid::move(Particle &particle) {
     *y = *y < 0 ? -(*y) : 2*height-(*y);
     particle.velocity.y *= -1;
   }
+  *x = max(0.0, min((double) width, *x));
+  *y = max(0.0, min((double) height, *y));
 }
 
 void apply_force(Particle &particle, Particle &neighbor)
 {
+  if (&particle == &neighbor) return;
   Vector2D dPosition = neighbor.position - particle.position;
   double r2 = dPosition.norm2();
-  if( r2 > cutoff*cutoff )
+  if( r2 > particle.radius*particle.radius )
     return;
 //  if (r2 != 0)
 //  {
@@ -80,6 +91,6 @@ void apply_force(Particle &particle, Particle &neighbor)
   //
   //  very simple short-range repulsive force
   //
-  double coef = ( 1 - cutoff / r ) / r2 / particle.mass;
+  double coef = ( 1 - particle.radius / r ) / r2 / particle.mass;
   particle.acceleration += coef * dPosition;
 }

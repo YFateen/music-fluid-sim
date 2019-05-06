@@ -19,8 +19,8 @@
 
 #define density 0.0005
 //#define mass    0.01
-#define cutoff  10.0
-#define min_r   (cutoff/100)
+//#define cutoff  10.0
+#define min_r   1.0
 //#define dt      0.0005
 
 using namespace CGL;
@@ -50,7 +50,7 @@ public:
 
 class ParticleGrid {
 public:
-  float t = 0;
+  int ts = 0;
 
   ParticleGrid(float interaction_radius, float dt) :
                interaction_radius(interaction_radius), dt(dt) {
@@ -59,6 +59,7 @@ public:
   void resize(size_t w, size_t h) {
     width = w;
     height = h;
+    cout << width << " " << height << endl;
   };
 
   void add(const Particle& particle);
@@ -67,11 +68,11 @@ public:
     return &particles;
   }
 
-  void update_particles();
+  void update_particles(uint8_t magnitude);
 
 private:
-  size_t width;
-  size_t height;
+  size_t width = 0;
+  size_t height = 0;
   float interaction_radius;
 
   float dt;

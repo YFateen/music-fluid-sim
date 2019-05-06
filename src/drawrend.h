@@ -12,7 +12,7 @@
 #include "svg.h"
 #include "particle.h"
 
-extern long start;
+extern float start;
 
 namespace CGL {
 

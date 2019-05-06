@@ -27,7 +27,7 @@ using namespace CGL;
 
 #define msg(s) cerr << "[Drawer] " << s << endl;
 
-long start;
+float start;
 
 SVG *loadFile( const char* path ) {
 
@@ -135,7 +135,7 @@ void start_audio(const char* path) {
   if (answer) cwd = answer;
   string full_path = "afplay " + cwd + "/" + string(path) + " &";
   cout << full_path << endl;
-  // Load signal into memory
+  system("killall afplay");
   system(full_path.c_str());
   atexit([] () {system("killall afplay");});
 }
@@ -143,25 +143,19 @@ void start_audio(const char* path) {
 int main( int argc, char** argv ) {
   if (argc < 3) {
     msg("Usage: ./draw <audio file> <data file>")
+    msg("Example: ./draw res/test_song/test_song.mp3 res/test_song/test_song_8b_10Hz")
     return 0;
   }
 
   // Placeholder inputs
-  int sample_rate = 2;
+  int sample_rate;
   std::vector<uint8_t> audio_signal;
-//  std::vector<uint8_t> audio_signal(255*2);
-//  for (int i = 0; i < 255; i++) {
-//    audio_signal[i] = i;
-//  }
-//  for (int i = 255; i < 255*2; i++) {
-//    audio_signal[i] = 255*2 - i;
-//  }
+
   load_data(argv[2], &sample_rate, &audio_signal);
   start_audio(argv[1]);
-//  start_audio("res/test_song/test_song_8b_1000Hz.wav");
   struct timespec ts{};
   clock_gettime(CLOCK_MONOTONIC, &ts);
-  start = ts.tv_sec;
+  start = ts.tv_sec + ts.tv_nsec * 1.0e-9;
 
     int debug = 0;
     
