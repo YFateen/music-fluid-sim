@@ -9,6 +9,7 @@
 #include "CGL/tinyexr.h"
 // typedef uint32_t gid_t;
 #include <iostream>
+#include <fstream>
 
 #include <unistd.h>
 #include <stdio.h>
@@ -107,7 +108,24 @@ vector<SVG*> loadPath( const char* path ) {
   return vector<SVG*>();
 }
 
-void start_audio(const char* path, int* sample_rate, vector<uint8_t>* signal) {
+void load_data(const char* path, int* sample_rate, vector<uint8_t>* signal) {
+  char buffer[1024];
+  char *answer = getcwd(buffer, sizeof(buffer));
+  string cwd;
+  if (answer) cwd = answer;
+  string full_path = cwd + "/" + string(path);
+  cout << full_path << endl;
+  ifstream data_file(full_path, ios::in | ios::binary);
+  int data_size;
+  if (data_file && data_file.read((char*) sample_rate, 4) && data_file.read((char*) &data_size, 4)) {
+    cout << "sr=" << *sample_rate << " l=" << data_size << endl;
+    signal->resize(data_size);
+    data_file.read((char*) &((*signal)[0]), data_size);
+  }
+  data_file.close();
+}
+
+void start_audio(const char* path) {
   // macOS's AVAudioPlayer is probably the move here, but I spent 3 hours trying to install/use
   // random audio libraries. Obviously this does not work on Windows, but otherwise has few
   // functional drawbacks
@@ -115,34 +133,31 @@ void start_audio(const char* path, int* sample_rate, vector<uint8_t>* signal) {
   char *answer = getcwd(buffer, sizeof(buffer));
   string cwd;
   if (answer) cwd = answer;
-  string full_path = "afplay " + cwd + "/../" + string(path) + " &";
+  string full_path = "afplay " + cwd + "/" + string(path) + " &";
+  cout << full_path << endl;
   // Load signal into memory
-
   system(full_path.c_str());
   atexit([] () {system("killall afplay");});
 }
 
 int main( int argc, char** argv ) {
-//  if (argc < 2) {
-//    msg("Not enough arguments. Pass in an .svg or a directory of .svg files.");
-//    return 0;
-//  }
+  if (argc < 3) {
+    msg("Usage: ./draw <audio file> <data file>")
+    return 0;
+  }
 
-//  vector<SVG*> svgs(loadPath(argv[1]));
-//  if (svgs.empty()) {
-//    msg("No svg files successfully loaded. Exiting.");
-//    return 0;
-//  }
   // Placeholder inputs
   int sample_rate = 2;
-  std::vector<uint8_t> audio_signal(255*2);
-  for (int i = 0; i < 255; i++) {
-    audio_signal[i] = i;
-  }
-  for (int i = 255; i < 255*2; i++) {
-    audio_signal[i] = 255*2 - i;
-  }
-  start_audio("res/test_song/test_song.mp3", &sample_rate, &audio_signal);
+  std::vector<uint8_t> audio_signal;
+//  std::vector<uint8_t> audio_signal(255*2);
+//  for (int i = 0; i < 255; i++) {
+//    audio_signal[i] = i;
+//  }
+//  for (int i = 255; i < 255*2; i++) {
+//    audio_signal[i] = 255*2 - i;
+//  }
+  load_data(argv[2], &sample_rate, &audio_signal);
+  start_audio(argv[1]);
 //  start_audio("res/test_song/test_song_8b_1000Hz.wav");
   struct timespec ts{};
   clock_gettime(CLOCK_MONOTONIC, &ts);
