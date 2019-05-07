@@ -36,17 +36,19 @@
 <h3>Yusuf Fateen, Brian Levis, Jayanth Sundaresan</h3>
 <h2>Milestone Video</h2>
 <iframe width=640 height=480 src="https://drive.google.com/file/d/1UcSojTQUlOxz_2BNt5QyxejF8sywyqWv/preview"></iframe>
-<p>Wow (Instrumental) - Post Malone</p>
+<p><small>Wow (Instrumental) - Post Malone</small></p>
 <h2>Particles</h2>
 <p>
     At each timestep, forces between particles are computed, particles are modified according to musical features,
     and particle positions are updated.
-
+</p>
+<p>
     In the above video, particles are slightly attracted to each other and collide elastically. Particles are colored
     according to speed, gravity is affected by subsampled audio magnitude, particles bulge according to "beats", and
     particles change color according to beats that form the main tempo of the song. In the video above, the color
     changes may be observed after the conclusion of the song's 20 second introduction.
-
+</p>
+<p>
     In order to support a large number of particles, we will implement a grid-based optimization data structure that
     will maintain location-based references to particles so that they can be interacted only with their closest
     neighbors. We also plan to implement fluid-simulation equations to replace the simple gravity-based ones shown
@@ -56,7 +58,9 @@
 <p>
     The render function brings the particle simulation up to date using the time since the music started playing, and
     redraws the entire canvas.
-
+    here.
+</p>
+<p>
     This pipeline is fairly slow, and is limited to lower resolutions. We also plan to improve the appearance of our
     particles.
 </p>
