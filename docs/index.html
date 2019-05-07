@@ -1,1 +1,55 @@
-wassup
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <style>
+        body {
+            padding: 80px;
+            /* width: 1000px; */
+            margin: auto;
+            text-align: left;
+            font-weight: 300;
+            font-family: 'Open Sans', sans-serif;
+            color: #121212;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        table {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    </style>
+    <title>Musical Musical</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" media="screen" /> -->
+</head>
+<body>
+<h1>CS 184: Computer Graphics and Imaging, Spring 2019</h1>
+<h1>Final Project: Choreographed Particle Simulation</h1>
+<h2>Yusuf Fateen, Brian Levis, Jayanth Sundaresan</h2>
+<br>
+<h2>Particles</h2>
+<p>
+    We implement a simple partiicle interaction rule, optimized by dividing the screen into a grid using the minimum
+    interaction radius. At each timestep, particle pairwise forces are calculated and particles are moved.
+</p>
+<h2>Rendering</h2>
+<p>
+    Currently, frames are rendered as fast as particles are updated, which is determined by the input frequency.
+    This pipeline is a bit limiting, and could be optimized.
+</p>
+<h2>Audio</h2>
+<p>
+    A python script converts an audio file into an extremely downsampled (low frequency and bitrate) magnitude signal,
+    and saves the file. Our simulator loads this data file into memory, and uses a shell command to play the
+    corresponding audio. The start time is recorded immediately following this call, to keep the simulation in sync.
+</p>
+</body>
+</html>

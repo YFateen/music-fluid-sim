@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: \"/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/install_manifest.txt\"")
+if (NOT EXISTS "/Users/YFateen/Berkeleysemesters/Spring_2019/CS_184/final/musical-fluid-sim/build/CGL/deps/glfw/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: \"/Users/YFateen/Berkeleysemesters/Spring_2019/CS_184/final/musical-fluid-sim/build/CGL/deps/glfw/install_manifest.txt\"")
 endif()
 
-file(READ "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/build/CGL/deps/glfw/install_manifest.txt" files)
+file(READ "/Users/YFateen/Berkeleysemesters/Spring_2019/CS_184/final/musical-fluid-sim/build/CGL/deps/glfw/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

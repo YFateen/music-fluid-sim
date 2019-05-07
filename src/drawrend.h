@@ -1,3 +1,5 @@
+#include <utility>
+
 #ifndef CGL_DRAWREND_H
 #define CGL_DRAWREND_H
 
@@ -10,26 +12,28 @@
 #include "svg.h"
 #include "particle.h"
 
+extern float start;
+
 namespace CGL {
 
 class DrawRend : public Renderer {
  public:
-  DrawRend(int audio_rate, std::vector<int> audio_magnitude):
-      audio_rate(audio_rate), audio_magnitude(audio_magnitude)
-  {}
+  DrawRend(int audio_rate, std::vector<uint8_t> audio_magnitude):
+      audio_rate(audio_rate), audio_magnitude(std::move(audio_magnitude)), grid(50, 1.0/audio_rate){
+  }
 
-  ~DrawRend();
+  ~DrawRend() override;
 
   // inherited Renderer interface functions
-  void init();
-  void render();
-  void resize( size_t w, size_t h );
-  std::string name() { return "Draw"; }
-  std::string info();
-  void cursor_event( float x, float y );
-  void scroll_event( float offset_x, float offset_y );
-  void mouse_event( int key, int event, unsigned char mods );
-  void keyboard_event( int key, int event, unsigned char mods );
+  void init() override;
+  void render() override;
+  void resize( size_t w, size_t h ) override;
+  std::string name() override { return "Draw"; }
+  std::string info() override;
+  void cursor_event( float x, float y ) override;
+  void scroll_event( float offset_x, float offset_y ) override;
+  void mouse_event( int key, int event, unsigned char mods ) override;
+  void keyboard_event( int key, int event, unsigned char mods ) override;
 
   void set_gl(bool gl_) { gl = gl_; }
 
@@ -76,15 +80,15 @@ class DrawRend : public Renderer {
   void rasterize_triangle( float x0, float y0,
                            float x1, float y1,
                            float x2, float y2,
-                           Color color, Triangle *tri = NULL );
+                           Color color, Triangle *tri = nullptr );
 
-  void rasterize_particle(Particle *particle);
+  void rasterize_particle(const Particle &particle);
 
 
 private:
   // Global state variables for SVGs, pixels, and view transforms
 //  std::vector<SVG*> svgs; size_t current_svg;
-  std::vector<Particle> particles;
+  ParticleGrid grid;
   std::vector<Matrix3x3> svg_to_ndc;
   float view_x, view_y, view_span;
 
@@ -101,7 +105,7 @@ private:
 
   // Audio
   int audio_rate;
-  std::vector<int> audio_magnitude;
+  std::vector<uint8_t> audio_magnitude;
 
   PixelSampleMethod psm;
   LevelSampleMethod lsm;
@@ -162,7 +166,7 @@ private:
     }
   };
 
-  std::vector<std::vector<SampleBuffer> > samplebuffer;
+  std::vector<std::vector<SampleBuffer>> samplebuffer;
 
   // This function takes the collected sub-pixel samples and
   // combines them together to fill in the framebuffer in preparation

@@ -67,12 +67,16 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/final/musical-fluid-sim/res/test_song/test_song.mp3 /Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/final/musical-fluid-sim/res/test_song/test_song_8b_10Hz"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/svg/basic/test2.svg"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/svg/basic/test3.svg"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "/Users/YFateen/BerkeleySemesters/Spring_2019/CS_184/projects/proj1/p1-rasterizer-YFateen/svg/basic/test4.svg"
