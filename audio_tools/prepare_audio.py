@@ -55,6 +55,7 @@ def reduce_bitrate(audio, bits_per_sample):
 
 
 def get_beats(audio_og, sample_rate_og, sample_rate):
+    print("Computing beats")
     audio_len = len(audio_og) * sample_rate // sample_rate_og
     tempo, beats = librosa.beat.beat_track(y=audio_og, sr=sample_rate_og)
     beat_indicator = np.zeros((audio_len, ), dtype=np.uint8)
@@ -64,6 +65,7 @@ def get_beats(audio_og, sample_rate_og, sample_rate):
 
 
 def get_onsets(audio_og, sample_rate_og, sample_rate):
+    print("Computing onsets")
     audio_len = len(audio_og) * sample_rate // sample_rate_og
     onsets = librosa.onset.onset_detect(y=audio_og, sr=sample_rate_og)
     onsets_indicator = np.zeros((audio_len, ), dtype=np.uint8)
@@ -72,24 +74,23 @@ def get_onsets(audio_og, sample_rate_og, sample_rate):
     return onsets_indicator
 
 
-def encode_audio_file(input_filename, output_filename, sample_rate=10):
-    audio_og, sample_rate_og = load_audio(input_filename)
-    audio = reduce_bitrate(resample(audio_og, sample_rate_og, sample_rate), 8)
-    onsets = get_onsets(audio_og, sample_rate_og, sample_rate)
-    beats = get_beats(audio_og, sample_rate_og, sample_rate)
-    # Write file encoded as such:
-    # 4B: sample rate
-    # 4B: magnitude length = X
-    # XB: wav data
-    # XB: onsets
-    # XB: beats
+def write_file(output_filename, sample_rate, magnitudes, onsets, beats):
+    print("Writing file")
     with open(output_filename, 'wb') as fp:
         fp.write(sample_rate.to_bytes(4, "little"))
-        fp.write(len(audio).to_bytes(4, "little"))
-        fp.write(bytes(audio))
+        fp.write(len(magnitudes).to_bytes(4, "little"))
+        fp.write(bytes(magnitudes))
         fp.write(bytes(onsets))
         fp.write(bytes(beats))
 
 
-# if __name__ == "__main__":
-#     encode_audio_file(args.input_file, args.output_file, args.sample_rate)
+def encode_audio_file(input_filename, output_filename, sample_rate=10):
+    audio_og, sample_rate_og = load_audio(input_filename)
+    magnitudes = reduce_bitrate(resample(audio_og, sample_rate_og, sample_rate), 8)
+    onsets = get_onsets(audio_og, sample_rate_og, sample_rate)
+    beats = get_beats(audio_og, sample_rate_og, sample_rate)
+    write_file(output_filename, sample_rate, magnitudes, onsets, beats)
+
+
+if __name__ == "__main__":
+    encode_audio_file(args.input_file, args.output_file, args.sample_rate)
