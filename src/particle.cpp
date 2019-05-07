@@ -11,7 +11,7 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
 //  cout << "ts: " << ts << " sig:" << multiplier << endl;
   // Apply some gravity!
   for (Particle &particle : particles) {
-    particle.acceleration.y = 1000 * multiplier - 200;
+    particle.acceleration.y = 100 * multiplier - 20;
     particle.acceleration.x = 100 * multiplier - 20;
   }
   // TODO: optimize this using the grid!!!
@@ -31,9 +31,8 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
   for (Particle &particle : particles) {
     move(particle, multiplier);
     int natural_radius = (((uint64_t) &particle & 0xff0) >> 4) % 20;
-    particle.radius += (natural_radius - particle.radius) * 0.01 + 3 * onset;
-//      particle.particle_circumference();
     particle_collision(particle, particles);
+    particle.radius += (natural_radius - particle.radius) * 0.01 + 3 * onset;
   }
   ts++;
 }
@@ -105,11 +104,23 @@ void ParticleGrid::colliding_pairs(vector<pair<Particle*, Particle*>> vecCollidi
     
         float m1 = (dpNorm1 * (p1->mass - p2->mass) + 2.0f * p2->mass * dpNorm2) / (p1->mass + p2->mass);
         float m2 = (dpNorm2 * (p2->mass - p1->mass) + 2.0f * p1->mass * dpNorm1) / (p1->mass + p2->mass);
-    
-        p1->velocity[0] = tx * dpTan1 + nx * m1;
-        p1->velocity[1] = ty * dpTan1 + ny * m1;
-        p2->velocity[0] = tx * dpTan2 + nx * m2;
-        p2->velocity[1] = ty * dpTan2 + ny * m2;
+
+//        p1->velocity[0] = tx * dpTan1 + nx * m1;
+//        p1->velocity[1] = ty * dpTan1 + ny * m1;
+//        p2->velocity[0] = tx * dpTan2 + nx * m2;
+//        p1->velocity[1] = ty * dpTan2 + ny * m2;
+//
+        float p1vx = tx * dpTan1 + nx * m1;
+        float p1vy = ty * dpTan1 + ny * m1;
+        float p2vx = tx * dpTan2 + nx * m2;
+        float p2vy = ty * dpTan2 + ny * m2;
+
+//        Attempting to dampen the velocities
+        p1->velocity[0] = (p1vx > 20.0) ? (p1vx*(3.0/4.0)) : (p1vx);
+        p1->velocity[1] = (p1vy > 20.0) ? (p1vy*(3.0/4.0)) : (p1vy);
+        p2->velocity[0] = (p2vx > 20.0) ? (p2vx*(3.0/4.0)) : (p2vx);
+        p2->velocity[1] = (p2vy > 20.0) ? (p2vy*(3.0/4.0)) : (p2vy);
+
     }
 }
 

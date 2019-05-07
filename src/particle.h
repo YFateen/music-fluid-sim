@@ -36,7 +36,6 @@ public:
   Particle(const Vector2D &position, double radius, double mass, const Vector2D &velocity, const Vector2D &acceleration,
            const Color color, const int ballID) :
            position(position), radius(radius), mass(mass), velocity(velocity), acceleration(acceleration), color(color), ballID(ballID) {
-               particle_circumference();
            }
 
   Vector2D position;
@@ -47,14 +46,14 @@ public:
   double mass;
   Color color;
   int ballID;
-  std::vector<Vector2D> interactivePoints;
+//  std::vector<Vector2D> interactivePoints;
 
-void particle_circumference() {
-  int numInteractivePoints = 20;
-  for (int i = 0; i < numInteractivePoints; i++) {
-      interactivePoints.push_back(Vector2D(cosf(i / (float) (numInteractivePoints - 1) * 2.0f * 3.14159f) * radius ,cosf(i / (float) (numInteractivePoints - 1) * 2.0f * 3.14159f) * radius ));
-  }
-  }
+//void particle_circumference() {
+//  int numInteractivePoints = 20;
+//  for (int i = 0; i < numInteractivePoints; i++) {
+//      interactivePoints.push_back(Vector2D(cosf(i / (float) (numInteractivePoints - 1) * 2.0f * 3.14159f) * radius ,cosf(i / (float) (numInteractivePoints - 1) * 2.0f * 3.14159f) * radius ));
+//  }
+//  }
 };
 
 class ParticleGrid {
