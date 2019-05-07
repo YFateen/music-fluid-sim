@@ -165,7 +165,7 @@ int main( int argc, char** argv ) {
   start = ts.tv_sec + ts.tv_nsec * 1.0e-9;
 
   // create application
-  DrawRend app(sample_rate, magnitude);
+  DrawRend app(sample_rate, magnitude, onsets, beats);
 
 
 
