@@ -71,6 +71,10 @@ class DrawRend : public Renderer {
   void rasterize_circle(float x, float y,
                    float size, Color color);
     
+    // rasterize a circle
+    void rasterize_circle2(float x, float y,
+                           float size, Color color);
+    
   // circle_draw helper method
     void circle_draw_helper(int xCoordinate, int yCoordinate,
                             int tempX, int tempY,

@@ -34,8 +34,8 @@ public:
   }
 
   Particle(const Vector2D &position, double radius, double mass, const Vector2D &velocity, const Vector2D &acceleration,
-           const Color color) :
-           position(position), radius(radius), mass(mass), velocity(velocity), acceleration(acceleration), color(color) {
+           const Color color, const int ballid) :
+           position(position), radius(radius), mass(mass), velocity(velocity), acceleration(acceleration), color(color), ballid(ballid) {
   }
 
   Vector2D position;
@@ -45,6 +45,7 @@ public:
   double radius;
   double mass;
 
+  int ballid;
   Color color;
 };
 
@@ -82,6 +83,11 @@ private:
 
   void interact(Particle &particle, Particle &neighbor);
   void move(Particle &particle, float multiplier);
+    
+  bool circle_overlap(float x1, float y1, float r1, float x2, float y2, float r2);
+  void particle_collision(Particle &particle, list<Particle> neighbors);
+  void colliding_pairs(vector<pair<Particle*, Particle*>> vecCollidingPairs);
+    
 };
 
 #endif /* particle_hpp */
