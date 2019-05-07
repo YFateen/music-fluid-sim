@@ -22,7 +22,7 @@ BITS_TO_DTYPE = {
 parser = argparse.ArgumentParser(description='Create a data file for the Choreographed Particle Simulator')
 parser.add_argument('input_file', type=str, help='audio file path')
 parser.add_argument('output_file', type=str, help='data file path')
-parser.add_argument('--sample_rate', '-r', type=int, required=False, default=10)
+parser.add_argument('--sample_rate', '-r', type=int, required=False, default=100)
 # parser.add_argument('--bits_per_sample', '-b', type=int, required=False, default=8)
 args = parser.parse_args()
 
@@ -54,24 +54,26 @@ def reduce_bitrate(audio, bits_per_sample):
     return audio
 
 
-def get_beats(audio_og, sample_rate_og, sample_rate):
-    print("Computing beats")
-    audio_len = len(audio_og) * sample_rate // sample_rate_og
-    tempo, beats = librosa.beat.beat_track(y=audio_og, sr=sample_rate_og)
-    beat_indicator = np.zeros((audio_len, ), dtype=np.uint8)
-    if len(beats) * 100 < audio_len:
-        beat_indicator[beats * sample_rate // sample_rate_og] = 1
-    return beat_indicator
-
-
 def get_onsets(audio_og, sample_rate_og, sample_rate):
     print("Computing onsets")
     audio_len = len(audio_og) * sample_rate // sample_rate_og
-    onsets = librosa.onset.onset_detect(y=audio_og, sr=sample_rate_og)
+    onsets = librosa.onset.onset_detect(y=audio_og, sr=sample_rate_og, units='samples')
     onsets_indicator = np.zeros((audio_len, ), dtype=np.uint8)
-    if len(onsets) * 100 < audio_len:
+    if len(onsets) * 10 < audio_len:
+        print("Found", len(onsets), "onsets for audio length", audio_len)
         onsets_indicator[onsets * sample_rate // sample_rate_og] = 1
     return onsets_indicator
+
+
+def get_beats(audio_og, sample_rate_og, sample_rate):
+    print("Computing beats")
+    audio_len = len(audio_og) * sample_rate // sample_rate_og
+    tempo, beats = librosa.beat.beat_track(y=audio_og, sr=sample_rate_og, units='samples')
+    beat_indicator = np.zeros((audio_len, ), dtype=np.uint8)
+    print("Found", len(beats), "beats for audio length", audio_len)
+    if len(beats) * 10 < audio_len:
+        beat_indicator[beats * sample_rate // sample_rate_og] = 1
+    return beat_indicator
 
 
 def write_file(output_filename, sample_rate, magnitudes, onsets, beats):
@@ -79,12 +81,13 @@ def write_file(output_filename, sample_rate, magnitudes, onsets, beats):
     with open(output_filename, 'wb') as fp:
         fp.write(sample_rate.to_bytes(4, "little"))
         fp.write(len(magnitudes).to_bytes(4, "little"))
+        assert len(magnitudes) == len(onsets) == len(beats)
         fp.write(bytes(magnitudes))
         fp.write(bytes(onsets))
         fp.write(bytes(beats))
 
 
-def encode_audio_file(input_filename, output_filename, sample_rate=10):
+def encode_audio_file(input_filename, output_filename, sample_rate):
     audio_og, sample_rate_og = load_audio(input_filename)
     magnitudes = reduce_bitrate(resample(audio_og, sample_rate_og, sample_rate), 8)
     onsets = get_onsets(audio_og, sample_rate_og, sample_rate)
