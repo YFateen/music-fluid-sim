@@ -6,23 +6,34 @@
 
 #include "particle.h"
 
-void ParticleGrid::update_particles(uint8_t audio_magnitude) {
-  float multiplier = audio_magnitude / 255.0;
-  cout << "ts: " << ts << " sig:" << multiplier << endl;
+void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t beat) {
+  float multiplier = magnitude / 255.0;
+//  cout << "ts: " << ts << " sig:" << multiplier << endl;
   // Apply some gravity!
   for (Particle &particle : particles) {
     particle.acceleration.y = 1000 * multiplier - 200;
-    particle.velocity = 0.5 * particle.velocity + 1.5 * multiplier * particle.velocity;
-//    particle.color = Color(1.0, 1.0 - multiplier, 1.0 - multiplier);
+    particle.acceleration.x = 100 * multiplier - 20;
   }
   // TODO: optimize this using the grid!!!
-  for (Particle &particle : particles) {
-    for (Particle &neighbor : particles) {
-      interact(particle, neighbor);
+//  for (Particle &particle : particles) {
+//    for (Particle &neighbor : particles) {
+//      interact(particle, neighbor);
+//    }
+//  }
+  if ((int) beat != 0) {
+    for (Particle &particle : particles) {
+      float r = (float) rand() / (float) RAND_MAX;
+      float g = (float) rand() / (float) RAND_MAX;
+      float b = (float) rand() / (float) RAND_MAX;
+      particle.color = Color(r, g, b);
     }
   }
   for (Particle &particle : particles) {
-    move(particle);
+    move(particle, multiplier);
+    int natural_radius = (((uint64_t) &particle & 0xff0) >> 4) % 20;
+    particle.radius += (natural_radius - particle.radius) * 0.01 + 3 * onset;
+//      particle.particle_circumference();
+    particle_collision(particle, particles);
   }
   ts++;
 }
@@ -42,9 +53,69 @@ void ParticleGrid::add(const Particle& particle) {
 }
 
 
+bool ParticleGrid::circle_overlap(float x1, float y1, float r1, float x2, float y2, float r2) {
+    return fabs((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2)) <= (r1 + r2)*(r1 + r2);
+}
+
+
+void ParticleGrid::particle_collision(Particle &particle, list<Particle> neighbors) {
+    vector<pair<Particle*, Particle*>> vecCollidingPairs;
+    
+    for (auto &neighbor: neighbors) {
+        if (particle.ballID != neighbor.ballID) {
+            if (circle_overlap(particle.position[0], particle.position[1], particle.radius, neighbor.position[0], neighbor.position[1], neighbor.radius)) {
+                
+                vecCollidingPairs.push_back({ &particle, &neighbor });
+                
+                float distanceBetweenCenters = sqrtf((particle.position[0] - neighbor.position[0])*(particle.position[0] - neighbor.position[0]) +
+                                                     (particle.position[1] - neighbor.position[1])*(particle.position[1] - neighbor.position[1]));
+                float overlap = 0.5f * (distanceBetweenCenters - particle.radius - neighbor.radius);
+    
+                particle.position[0] -= overlap * (particle.position[0] - neighbor.position[0]) / distanceBetweenCenters;
+                particle.position[1] -= overlap * (particle.position[1] - neighbor.position[1]) / distanceBetweenCenters;
+    
+                neighbor.position[0] -= overlap * (neighbor.position[0] - particle.position[0]) / distanceBetweenCenters;
+                neighbor.position[1] -= overlap * (neighbor.position[1] - particle.position[1]) / distanceBetweenCenters;
+            }
+        
+        }
+    }
+    colliding_pairs(vecCollidingPairs);
+}
+
+void ParticleGrid::colliding_pairs(vector<pair<Particle*, Particle*>> vecCollidingPairs) {
+    
+    for (auto pair: vecCollidingPairs) {
+        Particle *p1 = pair.first;
+        Particle *p2 = pair.second;
+    
+        // Distance between balls
+        float fDistance = sqrtf((p1->position[0] - p2->position[0])*(p1->position[0] - p2->position[0]) + (p1->position[1] - p2->position[1])*(p1->position[1] - p2->position[1]));
+    
+        // Normal
+        float nx = (p2->position[0] - p1->position[0]) / fDistance;
+        float ny = (p2->position[1] - p1->position[1]) / fDistance;
+        float tx = -ny;
+        float ty = nx;
+    
+        float dpTan1 = p1->velocity[0] * tx + p1->velocity[1] * ty;
+        float dpTan2 = p2->velocity[0] * tx + p2->velocity[1] * ty;
+        float dpNorm1 = p1->velocity[0] * nx + p1->velocity[1] * ny;
+        float dpNorm2 = p2->velocity[0] * nx + p2->velocity[0] * ny;
+    
+        float m1 = (dpNorm1 * (p1->mass - p2->mass) + 2.0f * p2->mass * dpNorm2) / (p1->mass + p2->mass);
+        float m2 = (dpNorm2 * (p2->mass - p1->mass) + 2.0f * p1->mass * dpNorm1) / (p1->mass + p2->mass);
+    
+        p1->velocity[0] = tx * dpTan1 + nx * m1;
+        p1->velocity[1] = ty * dpTan1 + ny * m1;
+        p2->velocity[0] = tx * dpTan2 + nx * m2;
+        p2->velocity[1] = ty * dpTan2 + ny * m2;
+    }
+}
+
 // FOLLOWING IS *PLACEHOLDER* INTERACTION CODE FROM CS 267 HOMEWORK
 
-void ParticleGrid::move(Particle &particle) {
+void ParticleGrid::move(Particle &particle, float multiplier) {
   //
   //
   //  slightly simplified Velocity Verlet integration
@@ -58,39 +129,26 @@ void ParticleGrid::move(Particle &particle) {
   //
   double *x = &(particle.position.x);
   double *y = &(particle.position.y);
-  while(*x < 0 || *x > width)
+  if (*x < particle.radius || *x > width-particle.radius)
   {
-    *x = *x < 0 ? -(*x) : 2*width-(*x);
+    *x = *x < particle.radius ? particle.radius : width-particle.radius;
     particle.velocity.x *= -1;
   }
-  while(*y < 0 || *y > height)
+  if (*y < particle.radius || *y > height-particle.radius)
   {
-    *y = *y < 0 ? -(*y) : 2*height-(*y);
+    *y = *y < particle.radius ? particle.radius : height-particle.radius;
     particle.velocity.y *= -1;
   }
-  *x = max(0.0, min((double) width, *x));
-  *y = max(0.0, min((double) height, *y));
+  *x = max(particle.radius, min((double) (width-particle.radius), *x));
+  *y = max(particle.radius, min((double) (height-particle.radius), *y));
 }
 
 void apply_force(Particle &particle, Particle &neighbor)
 {
   if (&particle == &neighbor) return;
   Vector2D dPosition = neighbor.position - particle.position;
-  double r2 = dPosition.norm2();
-  if( r2 > particle.radius*particle.radius )
-    return;
-//  if (r2 != 0)
-//  {
-//    if (r2/(cutoff*cutoff) < *dmin * (*dmin))
-//      *dmin = sqrt(r2)/cutoff;
-//    (*davg) += sqrt(r2)/cutoff;
-//    (*navg) ++;
-//  }
-  r2 = fmax( r2, min_r*min_r );
-  double r = sqrt( r2 );
-  //
-  //  very simple short-range repulsive force
-  //
-  double coef = ( 1 - particle.radius / r ) / r2 / particle.mass;
-  particle.acceleration += coef * dPosition;
+  particle.acceleration -= 0.00000001 * dPosition.unit() * dPosition.norm2() / particle.mass;
+  if (dPosition.norm() < particle.radius + neighbor.radius) {
+    particle.velocity = -1 * dPosition;
+  }
 }

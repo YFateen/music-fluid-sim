@@ -108,7 +108,7 @@ vector<SVG*> loadPath( const char* path ) {
   return vector<SVG*>();
 }
 
-void load_data(const char* path, int* sample_rate, vector<uint8_t>* signal) {
+void load_data(const char* path, int* sample_rate, vector<uint8_t>* magnitude, vector<uint8_t>* onsets, vector<uint8_t>* beats) {
   char buffer[1024];
   char *answer = getcwd(buffer, sizeof(buffer));
   string cwd;
@@ -119,8 +119,12 @@ void load_data(const char* path, int* sample_rate, vector<uint8_t>* signal) {
   int data_size;
   if (data_file && data_file.read((char*) sample_rate, 4) && data_file.read((char*) &data_size, 4)) {
     cout << "sr=" << *sample_rate << " l=" << data_size << endl;
-    signal->resize(data_size);
-    data_file.read((char*) &((*signal)[0]), data_size);
+    magnitude->resize(data_size);
+    onsets->resize(data_size);
+    beats->resize(data_size);
+    data_file.read((char*) &((*magnitude)[0]), data_size);
+    data_file.read((char*) &((*onsets)[0]), data_size);
+    data_file.read((char*) &((*beats)[0]), data_size);
   }
   data_file.close();
 }
@@ -143,25 +147,25 @@ void start_audio(const char* path) {
 int main( int argc, char** argv ) {
   if (argc < 3) {
     msg("Usage: ./draw <audio file> <data file>")
-    msg("Example: ./draw res/test_song/test_song.mp3 res/test_song/test_song_8b_10Hz")
+    msg("Example: ./draw res/test_song/test_song.mp3 res/test_song/test_song_8b_100Hz")
     msg("Note: Use audio_tools/prepare_audio.py to generate new files")
     return 0;
   }
 
   // Placeholder inputs
   int sample_rate;
-  std::vector<uint8_t> audio_signal;
+  std::vector<uint8_t> magnitude;
+  std::vector<uint8_t> onsets;
+  std::vector<uint8_t> beats;
 
-  load_data(argv[2], &sample_rate, &audio_signal);
+  load_data(argv[2], &sample_rate, &magnitude, &onsets, &beats);
   start_audio(argv[1]);
   struct timespec ts{};
   clock_gettime(CLOCK_MONOTONIC, &ts);
   start = ts.tv_sec + ts.tv_nsec * 1.0e-9;
 
-    int debug = 0;
-    
   // create application
-  DrawRend app(sample_rate, audio_signal);
+  DrawRend app(sample_rate, magnitude, onsets, beats);
 
 
 
