@@ -18,8 +18,8 @@ namespace CGL {
 
 class DrawRend : public Renderer {
  public:
-  DrawRend(int audio_rate, std::vector<uint8_t> audio_magnitude):
-      audio_rate(audio_rate), audio_magnitude(std::move(audio_magnitude)), grid(50, 1.0/audio_rate){
+  DrawRend(int audio_rate, std::vector<uint8_t> magnitude, std::vector<uint8_t> onsets, std::vector<uint8_t> beats):
+      audio_rate(audio_rate), magnitude(std::move(magnitude)), onsets(std::move(onsets)), beats(std::move(beats)), grid(50, 1.0/audio_rate){
   }
 
   ~DrawRend() override;
@@ -89,8 +89,6 @@ private:
   // Global state variables for SVGs, pixels, and view transforms
 //  std::vector<SVG*> svgs; size_t current_svg;
   ParticleGrid grid;
-  std::vector<Matrix3x3> svg_to_ndc;
-  float view_x, view_y, view_span;
 
   Matrix3x3 ndc_to_screen;
 
@@ -105,7 +103,9 @@ private:
 
   // Audio
   int audio_rate;
-  std::vector<uint8_t> audio_magnitude;
+  std::vector<uint8_t> magnitude;
+  std::vector<uint8_t> onsets;
+  std::vector<uint8_t> beats;
 
   PixelSampleMethod psm;
   LevelSampleMethod lsm;

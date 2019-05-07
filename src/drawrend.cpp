@@ -57,7 +57,7 @@ namespace CGL {
     while (grid.ts < t_step) {
       cout << "tn: " << (now.tv_nsec - start) << " t: " << t << " tstep: " << grid.ts << endl;
       cout << "lag: " << t_step - grid.ts << endl;
-      grid.update_particles(audio_magnitude[grid.ts]);
+      grid.update_particles(magnitude[grid.ts], onsets[grid.ts], beats[grid.ts]);
     }
     for (const Particle &p : *grid.get_particles()) {
       rasterize_particle(p);

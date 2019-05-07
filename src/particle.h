@@ -68,7 +68,7 @@ public:
     return &particles;
   }
 
-  void update_particles(uint8_t magnitude);
+  void update_particles(uint8_t magnitude, uint8_t onset, uint8_t beat);
 
 private:
   size_t width = 0;

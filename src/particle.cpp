@@ -6,8 +6,8 @@
 
 #include "particle.h"
 
-void ParticleGrid::update_particles(uint8_t audio_magnitude) {
-  float multiplier = audio_magnitude / 255.0;
+void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t beat) {
+  float multiplier = magnitude / 255.0;
   cout << "ts: " << ts << " sig:" << multiplier << endl;
   // Apply some gravity!
   for (Particle &particle : particles) {
