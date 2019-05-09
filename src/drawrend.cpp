@@ -493,7 +493,8 @@ namespace CGL {
     if (sx < 0 || sx >= width) return;
     if (sy < 0 || sy >= height) return;
 
-    samplebuffer[sy][sx].fill_pixel(color);
+//    samplebuffer[sy][sx].fill_pixel(color);
+    fill_pixel(color, sx, sy);
     return;
 
   }
@@ -527,7 +528,8 @@ namespace CGL {
   void DrawRend::rasterize_square(float x, float y, float size, Color color) {
     for (int sx = max(0, (int) x); sx < min((int) (x + size), (int) width); sx++) {
       for (int sy = max(0, (int) y); sy < min((int) (y + size), (int) height); sy++) {
-        samplebuffer[sy][sx].fill_pixel(color);
+//        samplebuffer[sy][sx].fill_pixel(color);
+        fill_pixel(color, sx, sy);
       }
     }
   }

@@ -124,21 +124,18 @@ private:
     SampleBuffer(size_t sps) {
       sub_pixel = std::vector<unsigned char>(3, 255);
     }
-
-    void fill_pixel(Color c) {
-      for (int k = 0; k < 3; k++) sub_pixel[k] = (unsigned char) (c[k] * 255);
-    }
-
-    Color get_pixel_color() {
-      return Color(sub_pixel.data());
-    }
     
     void clear() {
       sub_pixel.assign(3, (unsigned char)255);
     }
   };
 
+
   std::vector<std::vector<SampleBuffer>> samplebuffer;
+
+  void fill_pixel(Color c, int i, int j) {
+    for (int k = 0; k < 3; k++) samplebuffer[j][i].sub_pixel[k] = (unsigned char) (c[k] * 255);
+  }
 
   // This function takes the collected sub-pixel samples and
   // combines them together to fill in the framebuffer in preparation
