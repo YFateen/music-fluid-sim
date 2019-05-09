@@ -585,14 +585,14 @@ namespace CGL {
 //    samplebuffer[yCoordinate-tempX][xCoordinate+tempY].fill_pixel(color);
 //    samplebuffer[yCoordinate-tempX][xCoordinate- tempY].fill_pixel(color);
 //
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate + tempX, yCoordinate + tempY, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate - tempX, yCoordinate + tempY, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate + tempX, yCoordinate - tempY, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate - tempX, yCoordinate - tempY, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate + tempY, yCoordinate + tempX, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate - tempY, yCoordinate + tempX, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate + tempY, yCoordinate - tempX, color);
-    rasterize_line(xCoordinate, yCoordinate, xCoordinate - tempY, yCoordinate - tempX, color);
+    rasterize_line(xCoordinate + tempX, yCoordinate, xCoordinate + tempX, yCoordinate + tempY, color);
+    rasterize_line(xCoordinate - tempX, yCoordinate, xCoordinate - tempX, yCoordinate + tempY, color);
+    rasterize_line(xCoordinate + tempX, yCoordinate, xCoordinate + tempX, yCoordinate - tempY, color);
+    rasterize_line(xCoordinate - tempX, yCoordinate, xCoordinate - tempX, yCoordinate - tempY, color);
+    rasterize_line(xCoordinate + tempY, yCoordinate, xCoordinate + tempY, yCoordinate + tempX, color);
+    rasterize_line(xCoordinate - tempY, yCoordinate, xCoordinate - tempY, yCoordinate + tempX, color);
+    rasterize_line(xCoordinate + tempY, yCoordinate, xCoordinate + tempY, yCoordinate - tempX, color);
+    rasterize_line(xCoordinate - tempY, yCoordinate, xCoordinate - tempY, yCoordinate - tempX, color);
 
   }
 
