@@ -116,57 +116,25 @@ private:
 
   bool gl;
 
-  typedef std::vector<unsigned char> PixelColorStorage;
-
   // Intuitively, a sample buffer instance is a pixel,
   // or (samples_per_side x samples_per_side) sub-pixels.
   struct SampleBuffer {
-    std::vector<std::vector<PixelColorStorage> > sub_pixels;
-    size_t samples_per_side;
+    std::vector<unsigned char> sub_pixel;
 
-    SampleBuffer(size_t sps): samples_per_side(sps) {
-      clear();
-    }
-    
-    // Fill the subpixel at i,j with the Color c
-    void fill_color(int i, int j, Color c) {
-      PixelColorStorage &p = sub_pixels[i][j];
-      // Part 1: Overwrite PixelColorStorage p using Color c.
-      //         Pay attention to different data types.
-      //
-      // I need to figure out how PixelColorStorage is structured, and transform the
-      // the value for RGB to byte representation.
-      for (int k = 0; k < 3; k++) p[k] = (unsigned char) (c[k] * 255);
+    SampleBuffer(size_t sps) {
+      sub_pixel = std::vector<unsigned char>(3, 255);
     }
 
     void fill_pixel(Color c) {
-      for (int i = 0; i < samples_per_side; ++i)
-        for (int j = 0; j < samples_per_side; ++j)
-          fill_color(i, j, c);
+      for (int k = 0; k < 3; k++) sub_pixel[k] = (unsigned char) (c[k] * 255);
     }
 
     Color get_pixel_color() {
-      return Color(sub_pixels[0][0].data());
-      // Part 2: Implement get_pixel_color() for supersampling.
+      return Color(sub_pixel.data());
     }
     
     void clear() {
-      if (sub_pixels.size() == samples_per_side) {
-        for (int i = 0; i < samples_per_side; ++i)
-          for (int j = 0; j < samples_per_side; ++j)
-            sub_pixels[i][j].assign(3, (unsigned char)255);
-        return;
-      }
-
-      sub_pixels.clear();
-      PixelColorStorage white = std::vector<unsigned char>(3, 255);
-      std::vector<PixelColorStorage> row;
-      row.reserve(samples_per_side);
-      for (int i = 0; i < samples_per_side; ++i)
-        row.push_back(white);
-      sub_pixels.reserve(samples_per_side);
-      for (int i = 0; i < samples_per_side; ++i)
-        sub_pixels.push_back(row);
+      sub_pixel.assign(3, (unsigned char)255);
     }
   };
 
@@ -178,9 +146,8 @@ private:
   void resolve() {
     for (int x = 0; x < width; ++x) {
       for (int y = 0; y < height; ++y) {
-        Color col = samplebuffer[y][x].get_pixel_color();
         for (int k = 0; k < 3; ++k) {
-          framebuffer[3 * (y * width + x) + k] = (&col.r)[k] * 255;
+          framebuffer[3 * (y * width + x) + k] = (&(samplebuffer[y][x].sub_pixel[0]))[k];
         }
       }
     }
