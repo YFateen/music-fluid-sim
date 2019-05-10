@@ -31,9 +31,9 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
     }
   for (Particle &particle : particles) {
     move(particle);
-    int natural_radius = (((uint64_t) &particle & 0xff0) >> 4) % 20;
+//    int natural_radius = (((uint64_t) &particle & 0xff0) >> 4) % 20;
     particle_collision(particle, particles);
-    particle.radius += (natural_radius - particle.radius) * 0.01 + 3 * onset;
+    particle.radius += (particle.natural_radius - particle.radius) * 0.01 + 3 * onset;
   }
   ts++;
 }

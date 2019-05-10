@@ -27,7 +27,8 @@ class Particle {
 public:
   explicit Particle(int max_x, int max_y, int min_r, int max_r) :
                     velocity(), acceleration() {
-    radius = min_r + rand() % (max_r - min_r);
+    natural_radius = min_r + rand() % (max_r - min_r);
+    radius = natural_radius;
     position = {rand() % (max_x - 2 * max_r) + max_r, rand() % (max_y - 2 * max_r) + max_r};
     mass = PI * radius * radius;
     color = {128/255.0,128/255.0,128/255.0};
@@ -35,13 +36,14 @@ public:
 
   Particle(const Vector2D &position, double radius, const Vector2D &velocity, const Vector2D &acceleration,
            const Color color, const int ballid) :
-           position(position), radius(radius), mass(PI * radius * radius), velocity(velocity), acceleration(acceleration), color(color), ballid(ballid) {
+           position(position), natural_radius(radius), radius(radius), mass(PI * radius * radius), velocity(velocity), acceleration(acceleration), color(color), ballid(ballid) {
   }
 
   Vector2D position;
   Vector2D velocity;
   Vector2D acceleration;
 
+  double natural_radius;
   double radius;
   double mass;
 
