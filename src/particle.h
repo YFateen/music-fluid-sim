@@ -25,8 +25,12 @@ using namespace std;
 
 class Particle {
 public:
-  explicit Particle(const Vector2D &position) :
-                    position(position), radius(1.0), mass(1.0), velocity({0, 0}), acceleration(), color() {
+  explicit Particle(int max_x, int max_y, int min_r, int max_r) :
+                    velocity(), acceleration() {
+    radius = min_r + rand() % (max_r - min_r);
+    position = {rand() % (max_x - 2 * max_r) + max_r, rand() % (max_y - 2 * max_r) + max_r};
+    mass = PI * radius * radius;
+    color = {128/255.0,128/255.0,128/255.0};
   }
 
   Particle(const Vector2D &position, double radius, const Vector2D &velocity, const Vector2D &acceleration,

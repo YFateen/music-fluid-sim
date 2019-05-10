@@ -12,7 +12,7 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
   float multiplier = magnitude / 255.0;
   // Apply some gravity!
   for (Particle &particle : particles) {
-      particle.acceleration.y = 80 * (10 * multiplier - 2);
+      particle.acceleration.y = 25 * (10 * multiplier - 2);
       particle.acceleration.x = 0;
   }
   for (Particle &particle : particles) {
@@ -72,7 +72,7 @@ void ParticleGrid::particle_collision(Particle &particle, list<Particle> neighbo
   for (vector<Particle*>* neighbor_list : neighbor_lists) {
     for (Particle *n : *neighbor_list) {
       Particle &neighbor = *n;
-      if (particle.ballid != neighbor.ballid) {
+      if (&particle != &neighbor) {
         if (circle_overlap(particle.position[0], particle.position[1], particle.radius, neighbor.position[0], neighbor.position[1], neighbor.radius)) {
 
           vecCollidingPairs.emplace_back( &particle, &neighbor );
@@ -170,7 +170,7 @@ void ParticleGrid::move(Particle &particle) {
 
 vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle, int *x, int *y) {
   *x = (int) (grid_width * particle.position.x / width);
-  *y = (int) (grid_height * particle.position.y / width);
+  *y = (int) (grid_height * particle.position.y / height);
   return &grid[*y * grid_height + *x];
 }
 
