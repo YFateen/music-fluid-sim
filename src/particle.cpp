@@ -49,26 +49,50 @@ bool ParticleGrid::circle_overlap(float x1, float y1, float r1, float x2, float 
 
 void ParticleGrid::particle_collision(Particle &particle, list<Particle> neighbors) {
     vector<pair<Particle*, Particle*>> vecCollidingPairs;
-    
-    for (auto &neighbor: neighbors) {
-        if (particle.ballid != neighbor.ballid) {
-            if (circle_overlap(particle.position[0], particle.position[1], particle.radius, neighbor.position[0], neighbor.position[1], neighbor.radius)) {
-                
-                vecCollidingPairs.emplace_back( &particle, &neighbor );
-                
-                float distanceBetweenCenters = sqrtf((particle.position[0] - neighbor.position[0])*(particle.position[0] - neighbor.position[0]) +
-                                                     (particle.position[1] - neighbor.position[1])*(particle.position[1] - neighbor.position[1]));
-                float overlap = 0.5f * (distanceBetweenCenters - particle.radius - neighbor.radius);
-                
-                particle.position[0] -= overlap * (particle.position[0] - neighbor.position[0]) / distanceBetweenCenters;
-                particle.position[1] -= overlap * (particle.position[1] - neighbor.position[1]) / distanceBetweenCenters;
-                
-                neighbor.position[0] -= overlap * (neighbor.position[0] - particle.position[0]) / distanceBetweenCenters;
-                neighbor.position[1] -= overlap * (neighbor.position[1] - particle.position[1]) / distanceBetweenCenters;
-            }
-            
+//    for (auto &neighbor: neighbors) {
+//        if (particle.ballid != neighbor.ballid) {
+//            if (circle_overlap(particle.position[0], particle.position[1], particle.radius, neighbor.position[0], neighbor.position[1], neighbor.radius)) {
+//
+//                vecCollidingPairs.emplace_back( &particle, &neighbor );
+//
+//                float distanceBetweenCenters = sqrtf((particle.position[0] - neighbor.position[0])*(particle.position[0] - neighbor.position[0]) +
+//                                                     (particle.position[1] - neighbor.position[1])*(particle.position[1] - neighbor.position[1]));
+//                float overlap = 0.5f * (distanceBetweenCenters - particle.radius - neighbor.radius);
+//
+//                particle.position[0] -= overlap * (particle.position[0] - neighbor.position[0]) / distanceBetweenCenters;
+//                particle.position[1] -= overlap * (particle.position[1] - neighbor.position[1]) / distanceBetweenCenters;
+//
+//                neighbor.position[0] -= overlap * (neighbor.position[0] - particle.position[0]) / distanceBetweenCenters;
+//                neighbor.position[1] -= overlap * (neighbor.position[1] - particle.position[1]) / distanceBetweenCenters;
+//            }
+//
+//        }
+//    }
+  vector<vector<Particle*>*> neighbor_lists = get_neighbors(particle);
+  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+    for (Particle *n : *neighbor_list) {
+      Particle &neighbor = *n;
+      if (particle.ballid != neighbor.ballid) {
+        if (circle_overlap(particle.position[0], particle.position[1], particle.radius, neighbor.position[0], neighbor.position[1], neighbor.radius)) {
+
+          vecCollidingPairs.emplace_back( &particle, &neighbor );
+
+          float distanceBetweenCenters = sqrtf((particle.position[0] - neighbor.position[0])*(particle.position[0] - neighbor.position[0]) +
+                                               (particle.position[1] - neighbor.position[1])*(particle.position[1] - neighbor.position[1]));
+          float overlap = 0.5f * (distanceBetweenCenters - particle.radius - neighbor.radius);
+
+          particle.position[0] -= overlap * (particle.position[0] - neighbor.position[0]) / distanceBetweenCenters;
+          particle.position[1] -= overlap * (particle.position[1] - neighbor.position[1]) / distanceBetweenCenters;
+
+          neighbor.position[0] -= overlap * (neighbor.position[0] - particle.position[0]) / distanceBetweenCenters;
+          neighbor.position[1] -= overlap * (neighbor.position[1] - particle.position[1]) / distanceBetweenCenters;
         }
+
+      }
     }
+  }
+
+
     colliding_pairs(vecCollidingPairs);
 }
 

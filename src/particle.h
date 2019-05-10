@@ -133,7 +133,7 @@ private:
   void move(Particle &particle);
     
   static bool circle_overlap(float x1, float y1, float r1, float x2, float y2, float r2);
-  static void particle_collision(Particle &particle, list<Particle> neighbors);
+  void particle_collision(Particle &particle, list<Particle> neighbors);
   static void colliding_pairs(const vector<pair<Particle*, Particle*>>& vecCollidingPairs);
 
   void init_boxes();

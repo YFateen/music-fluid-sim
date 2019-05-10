@@ -10,12 +10,11 @@
 #include <cstdlib>  // For srand() and rand()
 #include <random>
 
+#define brightness 200
 
 using namespace std;
 
 namespace CGL {
-
-  struct SVG;
 
 
   DrawRend::~DrawRend() {}
@@ -75,7 +74,7 @@ namespace CGL {
     framebuffer.resize(4 * w * h);
     grid.resize(w, h);
 
-    framebuffer.assign(framebuffer.size(), (unsigned char)255);
+    framebuffer.assign(framebuffer.size(), (unsigned char) brightness);
 
     float scale = min(width, height);
     redraw();
@@ -284,7 +283,7 @@ namespace CGL {
 
     if (gl)
       draw_pixels();
-    framebuffer.assign(framebuffer.size(), (unsigned char) 255);
+    framebuffer.assign(framebuffer.size(), (unsigned char) brightness);
   }
 
 /**
@@ -589,7 +588,6 @@ namespace CGL {
         grid.add(Particle({361, 616}, 5, {}, {}, {128/255.0,128/255.0,128/255.0}, 0));
         grid.add(Particle({665, 616}, 5, {}, {}, {128/255.0,128/255.0,128/255.0}, 0));
         grid.add(Particle({191, 317}, 5, {}, {}, {128/255.0,128/255.0,128/255.0}, 0));
-
 
     }
 
