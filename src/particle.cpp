@@ -23,7 +23,8 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
 //    }
 //  }
     if ((int) beat != 0) {
-        colorVector = rainbow[colorCount % rainbow.size()];
+            colorCount+= 1;
+            colorVector = rainbow[colorCount % rainbow.size()];
         for (Particle &particle : particles) {
             //      float r = (float) rand() / (float) RAND_MAX;
             //      float g = (float) rand() / (float) RAND_MAX;
