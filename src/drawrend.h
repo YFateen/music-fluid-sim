@@ -9,7 +9,6 @@
 #include <vector>
 #include <cstring>
 #include "GLFW/glfw3.h"
-#include "svg.h"
 #include "particle.h"
 
 extern float start;
@@ -80,12 +79,6 @@ class DrawRend : public Renderer {
                             int tempX, int tempY,
                             Color color);
 
-  // rasterize a triangle
-  void rasterize_triangle( float x0, float y0,
-                           float x1, float y1,
-                           float x2, float y2,
-                           Color color, Triangle *tri = nullptr );
-
   void rasterize_particle(const Particle &particle);
 
 
@@ -94,7 +87,6 @@ private:
 //  std::vector<SVG*> svgs; size_t current_svg;
   ParticleGrid grid;
 
-  Matrix3x3 ndc_to_screen;
 
   std::vector<unsigned char> framebuffer;
   size_t width, height;
@@ -111,8 +103,6 @@ private:
   std::vector<uint8_t> onsets;
   std::vector<uint8_t> beats;
 
-  PixelSampleMethod psm;
-  LevelSampleMethod lsm;
 
   bool gl;
 

@@ -39,8 +39,6 @@ namespace CGL {
     view_init();
 //  }
 //  current_svg = 0;
-    psm = P_NEAREST;
-    lsm = L_ZERO;
 
   }
 
@@ -81,11 +79,6 @@ namespace CGL {
     framebuffer.assign(framebuffer.size(), (unsigned char)255);
 
     float scale = min(width, height);
-    ndc_to_screen(0, 0) = scale;
-    ndc_to_screen(0, 2) = (width - scale) / 2;
-    ndc_to_screen(1, 1) = scale;
-    ndc_to_screen(1, 2) = (height - scale) / 2;
-
     redraw();
   }
 
@@ -99,7 +92,6 @@ namespace CGL {
   std::string DrawRend::info() {
     stringstream ss;
     stringstream sample_method;
-    sample_method << level_strings[lsm] << ", " << pixel_strings[psm];
     ss << "Resolution " << width << " x " << height << ". ";
     ss << "Using " << sample_method.str() << " sampling. ";
     ss << "Supersample rate " << sample_rate << " per pixel. ";
@@ -199,18 +191,6 @@ namespace CGL {
       case 'S':
         write_screenshot();
         break;
-
-        // toggle pixel sampling scheme
-      case 'P':
-        psm = (PixelSampleMethod) ((psm + 1) % 2);
-        redraw();
-        break;
-        // toggle level sampling scheme
-      case 'L':
-        lsm = (LevelSampleMethod) ((lsm + 1) % 3);
-        redraw();
-        break;
-
         // toggle zoom
       case 'Z':
         show_zoom = (show_zoom + 1) % 2;
@@ -578,38 +558,22 @@ namespace CGL {
 //    rasterize_circle(xCoordinate, yCoordinate, radius, particle.color);
   }
 
-// Rasterize a triangle.
-  void DrawRend::rasterize_triangle(float x0, float y0,
-                                    float x1, float y1,
-                                    float x2, float y2,
-                                    Color color, Triangle *tri) {
+  void DrawRend::particles_init() {
+    grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}, 0));
+    grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}, 1));
+    grid.add(Particle({700, 200}, 3, 0.01, {}, {},{.9, 0.2, .01}, 2));
+    grid.add(Particle({350, 600}, 30, 0.01, {5, 5}, {},{.2, 0.2, .91}, 3));
+    grid.add(Particle({150, 500}, 5, 0.01, {}, {},{.1, 0.2, .42}, 4));
+    grid.add(Particle({300, 200}, 3, 0.01, {}, {},{.9, 0.1, .87}, 5));
+    grid.add(Particle({600, 400}, 10, 0.01, {}, {},{.3, 0.7, 1.0}, 6));
 
-    // Part 1: Fill in this function with basic triangle rasterization code.
-    //         Hint: Implement fill_color() function first so that you can see
-    //         rasterized points and lines, then start rasterizing triangles.
-    //         Use something like this:
-    //             samplebuffer[row][column].fill_pixel(color);
-    // Part 2: Add supersampling.
-    //         You need to write color to each sub-pixel by yourself,
-    //         instead of using the fill_pixel() function.
-    //         Hint: Use the fill_color() function like this:
-    //             samplebuffer[row][column].fill_color(sub_row, sub_column, color);
-    //         You also need to implement get_pixel_color() function to support supersampling.
-    // Part 4: Add barycentric coordinates and use tri->color for shading when available.
-    // Part 5: Fill in the SampleParams struct and pass it to the tri->color function.
-    // Part 6: Pass in correct barycentric differentials to tri->color for mipmapping.
-
-
+    grid.add(Particle({200, 200*2}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}, 0));
+    grid.add(Particle({400, 400*2}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}, 1));
+    grid.add(Particle({700, 200*2}, 3, 0.01, {}, {},{.9, 0.2, .01}, 2));
+    grid.add(Particle({350, 600*2}, 30, 0.01, {5, 5}, {},{.2, 0.2, .91}, 3));
+    grid.add(Particle({150, 500*2}, 5, 0.01, {}, {},{.1, 0.2, .42}, 4));
+    grid.add(Particle({300, 200*2}, 3, 0.01, {}, {},{.9, 0.1, .87}, 5));
+    grid.add(Particle({600, 400*2}, 10, 0.01, {}, {},{.3, 0.7, 1.0}, 6));
   }
-
-    void DrawRend::particles_init() {
-        grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}, 0));
-        grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}, 1));
-        grid.add(Particle({700, 200}, 3, 0.01, {}, {},{.9, 0.2, .01}, 2));
-        grid.add(Particle({350, 600}, 30, 0.01, {5, 5}, {},{.2, 0.2, .91}, 3));
-        grid.add(Particle({150, 500}, 5, 0.01, {}, {},{.1, 0.2, .42}, 4));
-        grid.add(Particle({300, 200}, 3, 0.01, {}, {},{.9, 0.1, .87}, 5));
-        grid.add(Particle({600, 400}, 10, 0.01, {}, {},{.3, 0.7, 1.0}, 6));
-    }
 
 }
