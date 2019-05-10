@@ -38,25 +38,25 @@ public:
   Vector2D velocity;
   Vector2D acceleration;
 
+  float density = 0;
+  float pressure = 0;
+
   double radius;
   double mass;
 
   int ballid;
 //  Color color;
-    
+
     void setColor(const Color c) {
         this->color = c;
     }
-    
+
     Color getColor() const {
         return color;
     }
-    
+
 private:
     Color color;
-
-    float density = 0;
-    float pressure = 0;
 };
 
 class ParticleGrid {
@@ -140,10 +140,10 @@ private:
   static void colliding_pairs(const vector<pair<Particle*, Particle*>>& vecCollidingPairs);
 
   void init_boxes();
-  vector<Particle *>* get_grid_box(Particle &particle);
-
-  void compute_density(Particle &particle, list<Particle> &neighbors);
-  void compute_pressure(Particle &particle, list<Particle> &neighbors);
+  vector<Particle *>* get_grid_box(Particle &particle, int *x, int *y);
+  vector<vector<Particle*>*> get_neighbors(Particle &particle);
+  void compute_density(Particle &particle, vector<vector<Particle*>*> &neighbor_lists);
+  void compute_pressure(Particle &particle, vector<vector<Particle*>*> &neighbor_lists);
 };
 
 #endif /* particle_hpp */

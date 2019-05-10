@@ -155,18 +155,43 @@ void ParticleGrid::move(Particle &particle) {
   *y = max(particle.radius, min((double) (height-particle.radius), *y));
 }
 
-void ParticleGrid::compute_density(Particle &particle, list<Particle> &neighbors) {
-  
+vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle, int *x, int *y) {
+  *x = (int) (grid_width * particle.position.x / width);
+  *y = (int) (grid_height * particle.position.y / width);
+  return &grid[*y * grid_height + *x];
 }
 
-void ParticleGrid::compute_pressure(Particle &particle, list<Particle> &neighbors) {
-
+vector<vector<Particle*>*> ParticleGrid::get_neighbors(Particle &particle) {
+  int grid_x;
+  int grid_y;
+  get_grid_box(particle, &grid_x, &grid_y);
+  vector<vector<Particle*>*> neighbor_list;
+  for (int y = max(0, grid_y-1); y <= min((int) height, grid_y+1); y++) {
+    for (int x = max(0, grid_x-1); x <= min((int) width, grid_x+1); x++) {
+      neighbor_list.push_back(&grid[grid_y * grid_height + grid_x]);
+    }
+  }
+  return neighbor_list;
 }
 
-vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle) {
-  int x = (int) (grid_width * particle.position.x / width);
-  int y = (int) (grid_height * particle.position.y / width);
-  return &grid[y * grid_height + x];
+void ParticleGrid::compute_density(Particle &particle, vector<vector<Particle*>*> &neighbor_lists) {
+  float local_mass = 0.0;
+  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+    for (Particle* n : *neighbor_list) {
+      local_mass += n->mass;
+    }
+  }
+  particle.density = local_mass / neighbor_lists.size() * width * height / grid_height / grid_width;
+}
+
+void ParticleGrid::compute_pressure(Particle &particle, vector<vector<Particle*>*> &neighbor_lists) {
+  particle.pressure = 0.0;
+  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+    for (Particle* n : *neighbor_list) {
+      float r2 = (particle.position - n->position).norm2();
+      particle.pressure += n->mass * exp(r2);
+    }
+  }
 }
 
 void ParticleGrid::resize(size_t w, size_t h) {
@@ -184,8 +209,9 @@ void ParticleGrid::init_boxes() {
   for (vector<Particle*> &v : grid) {
     v.clear();
   }
+  int x, y;
   for (Particle &p : particles) {
-    get_grid_box(p)->push_back(&p);
+    get_grid_box(p, &x, &y)->push_back(&p);
   }
 }
 
