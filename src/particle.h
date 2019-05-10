@@ -46,7 +46,18 @@ public:
   double mass;
 
   int ballid;
-  Color color;
+//  Color color;
+    
+    void setColor(const Color c) {
+        this->color = c;
+    }
+    
+    Color getColor() const {
+        return color;
+    }
+    
+private:
+    Color color;
 };
 
 class ParticleGrid {

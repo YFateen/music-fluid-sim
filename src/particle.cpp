@@ -23,13 +23,14 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
 //    }
 //  }
     if ((int) beat != 0) {
-            colorCount+= 1;
-            colorVector = rainbow[colorCount % rainbow.size()];
+        
+        colorVector = rainbow[colorCount % rainbow.size()];
+        colorCount+= 1;
         for (Particle &particle : particles) {
-            //      float r = (float) rand() / (float) RAND_MAX;
-            //      float g = (float) rand() / (float) RAND_MAX;
-            //      float b = (float) rand() / (float) RAND_MAX;
-            particle.color = colorVector[rand() % colorVector.size()];
+            float multiplier = min(1.0, particle.velocity.norm() / 500);
+            particle.setColor( colorVector[rand() % colorVector.size()] * multiplier + Color(1, 1, 1) * (1.0 - multiplier));
+            
+//            std::cout << "The particle color of " << particle.ballid << " is " << particle.getColor() << "\n\n";
         }
     }
   for (Particle &particle : particles) {
