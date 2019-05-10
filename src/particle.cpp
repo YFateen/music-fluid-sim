@@ -15,11 +15,9 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
       particle.acceleration.y = 100 * multiplier - 20;
       particle.acceleration.x = 100 * multiplier - 20;
   }
-//  for (Particle &particle : particles) {
-//    for (Particle &neighbor : particles) {
-//      interact(particle, neighbor);
-//    }
-//  }
+  for (Particle &particle : particles) {
+    apply_pressure(particle);
+  }
     if ((int) beat != 0) {
         
         colorVector = rainbow[colorCount % rainbow.size()];
@@ -40,23 +38,14 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
   ts++;
 }
 
-// Placeholder!!
-void apply_force(Particle &particle, Particle &neighbor);
-
-void ParticleGrid::interact(Particle &particle, Particle &neighbor) {
-  apply_force(particle, neighbor);
-}
-
 void ParticleGrid::add(const Particle& particle) {
   cout << "particle at x=" << particle.position.x << endl;
   particles.push_back(particle);
 }
 
-
 bool ParticleGrid::circle_overlap(float x1, float y1, float r1, float x2, float y2, float r2) {
     return fabs((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2)) <= (r1 + r2)*(r1 + r2);
 }
-
 
 void ParticleGrid::particle_collision(Particle &particle, list<Particle> neighbors) {
     vector<pair<Particle*, Particle*>> vecCollidingPairs;
@@ -161,6 +150,45 @@ vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle, int *x, int *
   return &grid[*y * grid_height + *x];
 }
 
+void ParticleGrid::apply_pressure(Particle &particle) {
+  vector<vector<Particle*>*> neighbor_lists = get_neighbors(particle);
+  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+    for (Particle *neighbor : *neighbor_list) {
+      if (neighbor == &particle) continue;
+      Vector2D dPosition = neighbor->position - particle.position;
+      double r = max((particle.radius + neighbor->radius) / 2, dPosition.norm());
+      particle.acceleration -= 100000 * dPosition.unit() / (r*r) / particle.mass * neighbor->mass;
+      // Apply viscosity
+      Vector2D dVelocity = neighbor->velocity - particle.velocity;
+      particle.velocity += dt * dVelocity / r / particle.mass * neighbor->mass;
+    }
+  }
+  // Apply viscosity
+//  for (Particle &neighbor : particles) {
+//    if (&neighbor == &particle) continue;
+//    Vector2D dVelocity = neighbor.velocity - particle.velocity;
+//    particle.velocity += 0.1 * dt * dVelocity;
+//  }
+//  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+//    for (Particle *neighbor : *neighbor_list) {
+//      if (neighbor == &particle) continue;
+//      Vector2D dPosition = neighbor->position - particle.position;
+//      Vector2D dVelocity = neighbor->velocity - particle.velocity;
+//      particle.velocity += 1 * dt * dVelocity / dPosition.norm();
+//    }
+//  }
+//    for (Particle &neighbor : particles) {
+//      if (&neighbor == &particle) continue;
+//      Vector2D dPosition = neighbor.position - particle.position;
+//      particle.acceleration += 10000 * dPosition.unit() / dPosition.norm2() / particle.mass * neighbor.mass;
+//  }
+
+//  compute_density(particle, neighbor_list);
+//  compute_pressure(particle, neighbor_list);
+}
+
+
+
 vector<vector<Particle*>*> ParticleGrid::get_neighbors(Particle &particle) {
   int grid_x;
   int grid_y;
@@ -175,23 +203,23 @@ vector<vector<Particle*>*> ParticleGrid::get_neighbors(Particle &particle) {
 }
 
 void ParticleGrid::compute_density(Particle &particle, vector<vector<Particle*>*> &neighbor_lists) {
-  float local_mass = 0.0;
-  for (vector<Particle*>* neighbor_list : neighbor_lists) {
-    for (Particle* n : *neighbor_list) {
-      local_mass += n->mass;
-    }
-  }
-  particle.density = local_mass / neighbor_lists.size() * width * height / grid_height / grid_width;
+//  float local_mass = 0.0;
+//  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+//    for (Particle* n : *neighbor_list) {
+//      local_mass += n->mass;
+//    }
+//  }
+//  particle.density = local_mass / neighbor_lists.size() * width * height / grid_height / grid_width;
 }
 
 void ParticleGrid::compute_pressure(Particle &particle, vector<vector<Particle*>*> &neighbor_lists) {
-  particle.pressure = 0.0;
-  for (vector<Particle*>* neighbor_list : neighbor_lists) {
-    for (Particle* n : *neighbor_list) {
-      float r2 = (particle.position - n->position).norm2();
-      particle.pressure += n->mass * exp(r2);
-    }
-  }
+//  for (vector<Particle*>* neighbor_list : neighbor_lists) {
+//    for (Particle* n : *neighbor_list) {
+//      Vector2D r =
+//      float r2 = (particle.position - n->position).norm2();
+//      particle.acceleration += n->mass * exp(r2);
+//    }
+//  }
 }
 
 void ParticleGrid::resize(size_t w, size_t h) {
@@ -212,14 +240,5 @@ void ParticleGrid::init_boxes() {
   int x, y;
   for (Particle &p : particles) {
     get_grid_box(p, &x, &y)->push_back(&p);
-  }
-}
-
-void apply_force(Particle &particle, Particle &neighbor) {
-  if (&particle == &neighbor) return;
-  Vector2D dPosition = neighbor.position - particle.position;
-  particle.acceleration -= 0.00000001 * dPosition.unit() * dPosition.norm2() / particle.mass;
-  if (dPosition.norm() < particle.radius + neighbor.radius) {
-    particle.velocity = -1 * dPosition;
   }
 }

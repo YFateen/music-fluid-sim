@@ -38,9 +38,6 @@ public:
   Vector2D velocity;
   Vector2D acceleration;
 
-  float density = 0;
-  float pressure = 0;
-
   double radius;
   double mass;
 
@@ -132,7 +129,7 @@ private:
     int colorCount = 0;
     
     
-  void interact(Particle &particle, Particle &neighbor);
+  void apply_pressure(Particle &particle);
   void move(Particle &particle);
     
   static bool circle_overlap(float x1, float y1, float r1, float x2, float y2, float r2);

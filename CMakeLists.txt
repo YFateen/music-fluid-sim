@@ -7,7 +7,7 @@ project(ChoreographedFluidSimulator)
 #-------------------------------------------------------------------------------
 # Build options
 #-------------------------------------------------------------------------------
-option(BUILD_DEBUG     "Build with debug settings"    ON)
+option(BUILD_DEBUG     "Build with debug settings"    OFF)
 option(BUILD_DOCS      "Build documentation"          OFF)
 
 #-------------------------------------------------------------------------------
