@@ -55,7 +55,7 @@ namespace CGL {
     int t_step = int(t * audio_rate);
     // Check if it is time to render/update
     while (grid.ts < t_step) {
-      grid.update_particles(magnitude[grid.ts], onsets[grid.ts], beats[grid.ts]);
+      grid.update_particles(magnitude[grid.ts], onsets[grid.ts], beats[grid.ts], t);
     }
     for (const Particle &p : *grid.get_particles()) {
       rasterize_particle(p);
