@@ -10,7 +10,7 @@
 #include <cstdlib>  // For srand() and rand()
 #include <random>
 
-#define brightness 200
+#define brightness 255
 
 using namespace std;
 
@@ -283,7 +283,9 @@ namespace CGL {
 
     if (gl)
       draw_pixels();
-    framebuffer.assign(framebuffer.size(), (unsigned char) brightness);
+//    framebuffer.assign(framebuffer.size(), (unsigned char) brightness);
+    unsigned char b = (unsigned char) (int) abs(brightness - ((int) (grid.ts / 15) % (2*brightness)));
+    framebuffer.assign(framebuffer.size(), b);
   }
 
 /**

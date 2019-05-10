@@ -12,8 +12,8 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
   float multiplier = magnitude / 255.0;
   // Apply some gravity!
   for (Particle &particle : particles) {
-      particle.acceleration.y = 100 * multiplier - 20;
-      particle.acceleration.x = 100 * multiplier - 20;
+      particle.acceleration.y = 80 * (10 * multiplier - 2);
+      particle.acceleration.x = 0;
   }
   for (Particle &particle : particles) {
     apply_pressure(particle);

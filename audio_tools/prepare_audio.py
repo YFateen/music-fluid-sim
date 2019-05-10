@@ -22,7 +22,7 @@ BITS_TO_DTYPE = {
 parser = argparse.ArgumentParser(description='Create a data file for the Choreographed Particle Simulator')
 parser.add_argument('input_file', type=str, help='audio file path')
 parser.add_argument('output_file', type=str, help='data file path')
-parser.add_argument('--sample_rate', '-r', type=int, required=False, default=100)
+parser.add_argument('--sample_rate', '-r', type=int, required=False, default=500)
 # parser.add_argument('--bits_per_sample', '-b', type=int, required=False, default=8)
 args = parser.parse_args()
 
