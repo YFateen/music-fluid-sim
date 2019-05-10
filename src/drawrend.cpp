@@ -551,28 +551,20 @@ namespace CGL {
     float xCoordinate = particle.position.x;
     float yCoordinate = particle.position.y;
     float radius = particle.radius;
-    float multiplier = min(1.0, particle.velocity.norm() / 500);
-    Color color = particle.color * multiplier + Color(1, 1, 1) * (1.0 - multiplier);
-    rasterize_circle(xCoordinate - radius, yCoordinate - radius, radius * 2, color);
+//    float multiplier = min(1.0, particle.velocity.norm() / 500);
+//    Color color = particle.getColor() * multiplier + Color(1, 1, 1) * (1.0 - multiplier);
+    rasterize_circle(xCoordinate - radius, yCoordinate - radius, radius * 2, particle.getColor());
 //    rasterize_circle(xCoordinate, yCoordinate, radius, particle.color);
   }
 
   void DrawRend::particles_init() {
-    grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}, 0));
-    grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}, 1));
-    grid.add(Particle({700, 200}, 3, 0.01, {}, {},{.9, 0.2, .01}, 2));
-    grid.add(Particle({350, 600}, 30, 0.01, {5, 5}, {},{.2, 0.2, .91}, 3));
-    grid.add(Particle({150, 500}, 5, 0.01, {}, {},{.1, 0.2, .42}, 4));
-    grid.add(Particle({300, 200}, 3, 0.01, {}, {},{.9, 0.1, .87}, 5));
-    grid.add(Particle({600, 400}, 10, 0.01, {}, {},{.3, 0.7, 1.0}, 6));
-
-    grid.add(Particle({200, 200*2}, 5, 0.01, {}, {}, {1.0, 0.2, 1.0}, 0));
-    grid.add(Particle({400, 400*2}, 8, 0.01, {}, {}, {.3, 0.2, 1.0}, 1));
-    grid.add(Particle({700, 200*2}, 3, 0.01, {}, {},{.9, 0.2, .01}, 2));
-    grid.add(Particle({350, 600*2}, 30, 0.01, {5, 5}, {},{.2, 0.2, .91}, 3));
-    grid.add(Particle({150, 500*2}, 5, 0.01, {}, {},{.1, 0.2, .42}, 4));
-    grid.add(Particle({300, 200*2}, 3, 0.01, {}, {},{.9, 0.1, .87}, 5));
-    grid.add(Particle({600, 400*2}, 10, 0.01, {}, {},{.3, 0.7, 1.0}, 6));
+      grid.add(Particle({200, 200}, 5, 0.01, {}, {}, {128/255.0,128/255.0,128/255.0}, 0));
+      grid.add(Particle({400, 400}, 8, 0.01, {}, {}, {128/255.0,128/255.0,128/255.0}, 1));
+      grid.add(Particle({700, 200}, 3, 0.01, {}, {},{128/255.0,128/255.0,128/255.0}, 2));
+      grid.add(Particle({350, 600}, 30, 0.01, {5, 5}, {},{128/255.0,128/255.0,128/255.0}, 3));
+      grid.add(Particle({150, 500}, 5, 0.01, {}, {},{128/255.0,128/255.0,128/255.0}, 4));
+      grid.add(Particle({300, 200}, 3, 0.01, {}, {},{128/255.0,128/255.0,128/255.0}, 5));
+      grid.add(Particle({600, 400}, 10, 0.01, {}, {},{128/255.0,128/255.0,128/255.0}, 6));
   }
 
 }
