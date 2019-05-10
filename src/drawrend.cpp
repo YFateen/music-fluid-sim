@@ -1,5 +1,4 @@
 #include "drawrend.h"
-#include "svg.h"
 #include "transforms.h"
 #include "CGL/misc.h"
 #include <iostream>

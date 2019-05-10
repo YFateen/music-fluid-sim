@@ -16,10 +16,8 @@
 #include <string.h>
 #include <ctime>
 
-#include "svg.h"
 #include "drawrend.h"
 #include "transforms.h"
-#include "svgparser.h"
 #include "particle.h"
 
 using namespace std;

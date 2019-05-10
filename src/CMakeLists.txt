@@ -7,21 +7,15 @@ cmake_minimum_required(VERSION 2.8)
 set(APPLICATION_SOURCE
         particle.cpp
     texture.cpp
-    triangulation.cpp
-    svgparser.cpp
-    transforms.cpp
+        transforms.cpp
     drawrend.cpp
-    svg.cpp
-    main.cpp
+        main.cpp
     # Add headers for the sake of Xcode/Visual Studio projects
         particle.h
     drawrend.h
-    svg.h
-    svgparser.h
-    texture.h
+        texture.h
     transforms.h
-    triangulation.h
-)
+        )
 
 #-------------------------------------------------------------------------------
 # Set include directories
