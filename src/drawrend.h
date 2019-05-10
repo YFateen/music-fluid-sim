@@ -116,23 +116,8 @@ private:
 
   bool gl;
 
-  vector<vector<vector<unsigned char>>> samplebuffer;
-
-  void fill_pixel(Color c, int i, int j) {
-    for (int k = 0; k < 3; k++) samplebuffer[j][i][k] = (unsigned char) (c[k] * 255);
-  }
-
-  // This function takes the collected sub-pixel samples and
-  // combines them together to fill in the framebuffer in preparation
-  // for posting pixels to the screen.
-  void resolve() {
-    for (int x = 0; x < width; ++x) {
-      for (int y = 0; y < height; ++y) {
-        for (int k = 0; k < 3; ++k) {
-          framebuffer[3 * (y * width + x) + k] = (&(samplebuffer[y][x][0]))[k];
-        }
-      }
-    }
+  void fill_pixel(Color c, int x, int y) {
+    for (int k = 0; k < 3; k++) framebuffer[3 * (y * width + x) + k] = (unsigned char) (c[k] * 255);
   }
 
 

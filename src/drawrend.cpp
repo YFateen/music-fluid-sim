@@ -78,10 +78,7 @@ namespace CGL {
     framebuffer.resize(4 * w * h);
     grid.resize(w, h);
 
-    samplebuffer.clear();
-    vector<vector<unsigned char>> samplebuffer_row(width, vector<unsigned char>(3, 255));
-    for (int i = 0; i < height; ++i)
-      samplebuffer.push_back(samplebuffer_row);
+    framebuffer.assign(framebuffer.size(), (unsigned char)255);
 
     float scale = min(width, height);
     ndc_to_screen(0, 0) = scale;
@@ -306,12 +303,9 @@ namespace CGL {
 //  rasterize_line(d.x, d.y, b.x, b.y, Color::Black);
 //  rasterize_line(d.x, d.y, c.x, c.y, Color::Black);
 
-    resolve();
     if (gl)
       draw_pixels();
-    for (int i = 0; i < samplebuffer.size(); ++i)
-      for (int j = 0; j < samplebuffer[i].size(); ++j)
-        samplebuffer[i][j].assign(3, (unsigned char)255);
+    framebuffer.assign(framebuffer.size(), (unsigned char) 255);
   }
 
 /**
