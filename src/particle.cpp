@@ -25,8 +25,8 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
         colorVector = rainbow[colorCount % rainbow.size()];
         colorCount+= 1;
         for (Particle &particle : particles) {
-            float multiplier = min(1.0, particle.velocity.norm() / 500);
-            particle.setColor( colorVector[rand() % colorVector.size()] * multiplier + Color(1, 1, 1) * (1.0 - multiplier));
+            float multiplier_ = min(1.0, particle.velocity.norm() / 500);
+            particle.setColor( colorVector[rand() % colorVector.size()] * multiplier_ + Color(1, 1, 1) * (1.0 - multiplier_));
             
 //            std::cout << "The particle color of " << particle.ballid << " is " << particle.getColor() << "\n\n";
         }
@@ -50,8 +50,6 @@ void ParticleGrid::interact(Particle &particle, Particle &neighbor) {
 void ParticleGrid::add(const Particle& particle) {
   cout << "particle at x=" << particle.position.x << endl;
   particles.push_back(particle);
-  Particle *p = &particles.back();
-  // TODO: add p to grid!
 }
 
 
@@ -67,7 +65,7 @@ void ParticleGrid::particle_collision(Particle &particle, list<Particle> neighbo
         if (particle.ballid != neighbor.ballid) {
             if (circle_overlap(particle.position[0], particle.position[1], particle.radius, neighbor.position[0], neighbor.position[1], neighbor.radius)) {
                 
-                vecCollidingPairs.push_back({ &particle, &neighbor });
+                vecCollidingPairs.emplace_back( &particle, &neighbor );
                 
                 float distanceBetweenCenters = sqrtf((particle.position[0] - neighbor.position[0])*(particle.position[0] - neighbor.position[0]) +
                                                      (particle.position[1] - neighbor.position[1])*(particle.position[1] - neighbor.position[1]));
@@ -85,7 +83,7 @@ void ParticleGrid::particle_collision(Particle &particle, list<Particle> neighbo
     colliding_pairs(vecCollidingPairs);
 }
 
-void ParticleGrid::colliding_pairs(vector<pair<Particle*, Particle*>> vecCollidingPairs) {
+void ParticleGrid::colliding_pairs(const vector<pair<Particle*, Particle*>>& vecCollidingPairs) {
     
     for (auto pair: vecCollidingPairs) {
         Particle *p1 = pair.first;
@@ -162,7 +160,7 @@ void ParticleGrid::compute_density(Particle &particle, list<Particle> &neighbors
 }
 
 void ParticleGrid::compute_pressure(Particle &particle, list<Particle> &neighbors) {
-  
+
 }
 
 vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle) {
