@@ -35,9 +35,9 @@ public:
                     position(position), radius(1.0), mass(1.0), velocity({0, 0}), acceleration(), color() {
   }
 
-  Particle(const Vector2D &position, double radius, double mass, const Vector2D &velocity, const Vector2D &acceleration,
+  Particle(const Vector2D &position, double radius, const Vector2D &velocity, const Vector2D &acceleration,
            const Color color, const int ballid) :
-           position(position), radius(radius), mass(mass), velocity(velocity), acceleration(acceleration), color(color), ballid(ballid) {
+           position(position), radius(radius), mass(PI * radius * radius), velocity(velocity), acceleration(acceleration), color(color), ballid(ballid) {
   }
 
   Vector2D position;

@@ -162,7 +162,7 @@ void ParticleGrid::compute_density(Particle &particle, list<Particle> &neighbors
 }
 
 void ParticleGrid::compute_pressure(Particle &particle, list<Particle> &neighbors) {
-
+  
 }
 
 vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle) {
