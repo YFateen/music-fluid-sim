@@ -5,8 +5,9 @@
 //
 
 #include "particle.h"
+#include <cmath>
 
-void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t beat) {
+void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t beat, int t) {
   float multiplier = magnitude / 255.0;
 //  cout << "ts: " << ts << " sig:" << multiplier << endl;
   // Apply some gravity!
@@ -21,14 +22,16 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
 //      interact(particle, neighbor);
 //    }
 //  }
-  if ((int) beat != 0) {
-    for (Particle &particle : particles) {
-      float r = (float) rand() / (float) RAND_MAX;
-      float g = (float) rand() / (float) RAND_MAX;
-      float b = (float) rand() / (float) RAND_MAX;
-      particle.color = Color(r, g, b);
+    if ((int) beat != 0) {
+            colorCount+= 1;
+            colorVector = rainbow[colorCount % rainbow.size()];
+        for (Particle &particle : particles) {
+            //      float r = (float) rand() / (float) RAND_MAX;
+            //      float g = (float) rand() / (float) RAND_MAX;
+            //      float b = (float) rand() / (float) RAND_MAX;
+            particle.color = colorVector[rand() % colorVector.size()];
+        }
     }
-  }
   for (Particle &particle : particles) {
     move(particle, multiplier);
     int natural_radius = (((uint64_t) &particle & 0xff0) >> 4) % 20;
