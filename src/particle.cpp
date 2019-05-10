@@ -156,7 +156,7 @@ void ParticleGrid::move(Particle &particle) {
 }
 
 void ParticleGrid::compute_density(Particle &particle, list<Particle> &neighbors) {
-
+  
 }
 
 void ParticleGrid::compute_pressure(Particle &particle, list<Particle> &neighbors) {

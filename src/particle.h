@@ -19,12 +19,6 @@
 
 #define BOX_SIZE 200
 
-#define density 0.0005
-//#define mass    0.01
-//#define cutoff  10.0
-//#define min_r   10.0
-//#define dt      0.0005
-
 using namespace CGL;
 using namespace std;
 
@@ -60,6 +54,9 @@ public:
     
 private:
     Color color;
+
+    float density = 0;
+    float pressure = 0;
 };
 
 class ParticleGrid {
@@ -139,7 +136,7 @@ private:
   void move(Particle &particle);
     
   static bool circle_overlap(float x1, float y1, float r1, float x2, float y2, float r2);
-  void particle_collision(Particle &particle, list<Particle> neighbors);
+  static void particle_collision(Particle &particle, list<Particle> neighbors);
   static void colliding_pairs(const vector<pair<Particle*, Particle*>>& vecCollidingPairs);
 
   void init_boxes();
