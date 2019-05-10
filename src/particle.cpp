@@ -155,6 +155,18 @@ void ParticleGrid::move(Particle &particle, float multiplier) {
   *y = max(particle.radius, min((double) (height-particle.radius), *y));
 }
 
+void ParticleGrid::compute_density(Particle &particle, list<Particle> &neighbors) {
+
+}
+
+void ParticleGrid::compute_pressure(Particle &particle, list<Particle> &neighbors) {
+
+}
+
+void ParticleGrid::get_grid_box(Particle &particle) {
+
+}
+
 void apply_force(Particle &particle, Particle &neighbor)
 {
   if (&particle == &neighbor) return;
