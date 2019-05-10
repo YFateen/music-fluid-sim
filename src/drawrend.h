@@ -116,25 +116,10 @@ private:
 
   bool gl;
 
-  // Intuitively, a sample buffer instance is a pixel,
-  // or (samples_per_side x samples_per_side) sub-pixels.
-  struct SampleBuffer {
-    std::vector<unsigned char> sub_pixel;
-
-    SampleBuffer(size_t sps) {
-      sub_pixel = std::vector<unsigned char>(3, 255);
-    }
-    
-    void clear() {
-      sub_pixel.assign(3, (unsigned char)255);
-    }
-  };
-
-
-  std::vector<std::vector<SampleBuffer>> samplebuffer;
+  vector<vector<vector<unsigned char>>> samplebuffer;
 
   void fill_pixel(Color c, int i, int j) {
-    for (int k = 0; k < 3; k++) samplebuffer[j][i].sub_pixel[k] = (unsigned char) (c[k] * 255);
+    for (int k = 0; k < 3; k++) samplebuffer[j][i][k] = (unsigned char) (c[k] * 255);
   }
 
   // This function takes the collected sub-pixel samples and
@@ -144,7 +129,7 @@ private:
     for (int x = 0; x < width; ++x) {
       for (int y = 0; y < height; ++y) {
         for (int k = 0; k < 3; ++k) {
-          framebuffer[3 * (y * width + x) + k] = (&(samplebuffer[y][x].sub_pixel[0]))[k];
+          framebuffer[3 * (y * width + x) + k] = (&(samplebuffer[y][x][0]))[k];
         }
       }
     }

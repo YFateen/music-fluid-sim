@@ -79,7 +79,7 @@ namespace CGL {
     grid.resize(w, h);
 
     samplebuffer.clear();
-    vector<SampleBuffer> samplebuffer_row(width, SampleBuffer(sqrt(sample_rate)));
+    vector<vector<unsigned char>> samplebuffer_row(width, vector<unsigned char>(3, 255));
     for (int i = 0; i < height; ++i)
       samplebuffer.push_back(samplebuffer_row);
 
@@ -198,31 +198,6 @@ namespace CGL {
         view_init();
         redraw();
         break;
-
-        // set the sampling rate to 1, 4, 9, or 16
-      case '=':
-        if (sample_rate < 16) {
-          sample_rate = (int) (sqrt(sample_rate) + 1) * (sqrt(sample_rate) + 1);
-
-          samplebuffer.clear();
-          vector<SampleBuffer> samplebuffer_row(width, SampleBuffer(sqrt(sample_rate)));
-          for (int i = 0; i < height; ++i)
-            samplebuffer.push_back(samplebuffer_row);
-          redraw();
-        }
-        break;
-      case '-':
-        if (sample_rate > 1) {
-          sample_rate = (int) (sqrt(sample_rate) - 1) * (sqrt(sample_rate) - 1);
-
-          samplebuffer.clear();
-          vector<SampleBuffer> samplebuffer_row(width, SampleBuffer(sqrt(sample_rate)));
-          for (int i = 0; i < height; ++i)
-            samplebuffer.push_back(samplebuffer_row);
-          redraw();
-        }
-        break;
-
         // save the current buffer to disk
       case 'S':
         write_screenshot();
@@ -336,7 +311,7 @@ namespace CGL {
       draw_pixels();
     for (int i = 0; i < samplebuffer.size(); ++i)
       for (int j = 0; j < samplebuffer[i].size(); ++j)
-        samplebuffer[i][j].clear();
+        samplebuffer[i][j].assign(3, (unsigned char)255);
   }
 
 /**
