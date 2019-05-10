@@ -8,15 +8,13 @@
 #include <cmath>
 
 void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t beat, int t) {
+  init_boxes();
   float multiplier = magnitude / 255.0;
-//  cout << "ts: " << ts << " sig:" << multiplier << endl;
   // Apply some gravity!
   for (Particle &particle : particles) {
-//    particle.acceleration.y = 1000 * multiplier - 200;
       particle.acceleration.y = 100 * multiplier - 20;
       particle.acceleration.x = 100 * multiplier - 20;
   }
-  // TODO: optimize this using the grid!!!
 //  for (Particle &particle : particles) {
 //    for (Particle &neighbor : particles) {
 //      interact(particle, neighbor);
@@ -34,7 +32,7 @@ void ParticleGrid::update_particles(uint8_t magnitude, uint8_t onset, uint8_t be
         }
     }
   for (Particle &particle : particles) {
-    move(particle, multiplier);
+    move(particle);
     int natural_radius = (((uint64_t) &particle & 0xff0) >> 4) % 20;
     particle_collision(particle, particles);
     particle.radius += (natural_radius - particle.radius) * 0.01 + 3 * onset;
@@ -131,7 +129,7 @@ void ParticleGrid::colliding_pairs(vector<pair<Particle*, Particle*>> vecCollidi
 
 // FOLLOWING IS *PLACEHOLDER* INTERACTION CODE FROM CS 267 HOMEWORK
 
-void ParticleGrid::move(Particle &particle, float multiplier) {
+void ParticleGrid::move(Particle &particle) {
   //
   //
   //  slightly simplified Velocity Verlet integration
@@ -159,8 +157,41 @@ void ParticleGrid::move(Particle &particle, float multiplier) {
   *y = max(particle.radius, min((double) (height-particle.radius), *y));
 }
 
-void apply_force(Particle &particle, Particle &neighbor)
-{
+void ParticleGrid::compute_density(Particle &particle, list<Particle> &neighbors) {
+
+}
+
+void ParticleGrid::compute_pressure(Particle &particle, list<Particle> &neighbors) {
+
+}
+
+vector<Particle *>* ParticleGrid::get_grid_box(Particle &particle) {
+  int x = (int) (grid_width * particle.position.x / width);
+  int y = (int) (grid_height * particle.position.y / width);
+  return &grid[y * grid_height + x];
+}
+
+void ParticleGrid::resize(size_t w, size_t h) {
+  width = w;
+  height = h;
+  grid_width = width / BOX_SIZE;
+  grid_height = height / BOX_SIZE;
+  grid.clear();
+  grid.resize(grid_width * grid_height);
+  cout << width << " " << height << endl;
+  cout << grid_width << "x" << grid_height << endl;
+}
+
+void ParticleGrid::init_boxes() {
+  for (vector<Particle*> &v : grid) {
+    v.clear();
+  }
+  for (Particle &p : particles) {
+    get_grid_box(p)->push_back(&p);
+  }
+}
+
+void apply_force(Particle &particle, Particle &neighbor) {
   if (&particle == &neighbor) return;
   Vector2D dPosition = neighbor.position - particle.position;
   particle.acceleration -= 0.00000001 * dPosition.unit() * dPosition.norm2() / particle.mass;
