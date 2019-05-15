@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <style>
+        body {
+            padding: 80px;
+            /* width: 1000px; */
+            margin: auto;
+            text-align: left;
+            font-weight: 300;
+            font-family: 'Open Sans', sans-serif;
+            color: #121212;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        table {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    </style>
+    <title>Musical Musical</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" media="screen" /> -->
+</head>
+<body>
+<h1>CS 184: Computer Graphics and Imaging, Spring 2019</h1>
+<h1>Final Project: Choreographed Particle Simulation</h1>
+<h3>Yusuf Fateen, Brian Levis, Jayanth Sundaresan</h3>
+<h2>Milestone Video</h2>
+<iframe width=640 height=480 src="https://drive.google.com/file/d/1UcSojTQUlOxz_2BNt5QyxejF8sywyqWv/preview"></iframe>
+<p><small>Wow (Instrumental) - Post Malone</small></p>
+<h2>Particles</h2>
+<p>
+    At each timestep, forces between particles are computed, particles are modified according to musical features,
+    and particle positions are updated.
+</p>
+<p>
+    In the above video, particles are slightly attracted to each other and collide elastically. Particles are colored
+    according to speed, gravity is affected by subsampled audio magnitude, particles bulge according to "beats", and
+    particles change color according to beats that form the main tempo of the song. In the video above, the color
+    changes may be observed after the conclusion of the song's 20 second introduction.
+</p>
+<p>
+    In order to support a large number of particles, we will implement a grid-based optimization data structure that
+    will maintain location-based references to particles so that they can be interacted only with their closest
+    neighbors. We also plan to implement fluid-simulation equations to replace the simple gravity-based ones shown
+    here.
+</p>
+<h2>Rendering</h2>
+<p>
+    The render function brings the particle simulation up to date using the time since the music started playing, and
+    redraws the entire canvas.
+    here.
+</p>
+<p>
+    This pipeline is fairly slow, and is limited to lower resolutions. We also plan to improve the appearance of our
+    particles.
+</p>
+<h2>Audio</h2>
+<p>
+    A python script takes in a sound file, and uses scipy and librosa to generate a low-frequency signal that represents
+    the volume of the audio at a simulation step. Onset envelopes and beats are calculated and matched to this lower
+    frequency. These vectors are saved as a data file and given as input to the simulator. The simulator plays the
+    audio using a child process, and uses the start time to keep the simulator synchronized.
+</p>
+<h2>Demo Slides</h2>
+<p><a href="https://docs.google.com/presentation/d/1fBorbTCqzyyeXt5AMFmBBxbzalXtAfszSqSTFEj8lzE/edit?usp=sharing">Slides</a></p>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQvFma3l9AX1LKlrt2Dl9xsCdtCxXzHJM05d3SbbVOEPD4raasbhZF1l1Uv_vBPvk0_vMyCDBkFdEnZ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+</body>
+</html>
