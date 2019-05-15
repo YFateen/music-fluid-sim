@@ -31,33 +31,99 @@
     <!-- <link rel="stylesheet" type="text/css" href="style.css" media="screen" /> -->
 </head>
 <body>
-<h1>CS 184: Computer Graphics and Imaging, Spring 2019</h1>
-<h1>Final Project: Choreographed Particle Simulation</h1>
+<h1>Choreographed Particle Simulation</h1>
 <h3>Yusuf Fateen, Brian Levis, Jayanth Sundaresan</h3>
 <p><small><a href="milestone/">Milestone Website</a></small></p>
-<h2>Video &ltPLACEHOLDER&gt</h2>
-<iframe width=640 height=480 src="https://drive.google.com/file/d/1UcSojTQUlOxz_2BNt5QyxejF8sywyqWv/preview"></iframe>
 <h2>Abstract</h2>
+<!-- A paragraph summary of the entire project -->
 <p>
-    A paragraph summary of the entire project.
+    We created a real-time particle simulator that synchronizes to music.
 </p>
 <h2>Technical approach</h2>
+<!-- A 1-2 page summary of your technical approach, techniques used, algorithms implemented, etc. (use references to papers or other resources for further detail). Highlight how your approach varied from the references used (did you implement a subset, or did you change or enhance anything), the unique decisions you made and why. -->
+<a href="https://github.com/brianlevis/musical-fluid-sim">Code is available here.</a>
+<h3>Rendering</h3>
 <p>
-    A 1-2 page summary of your technical approach, techniques used, algorithms implemented, etc. (use references to papers or other resources for further detail). Highlight how your approach varied from the references used (did you implement a subset, or did you change or enhance anything), the unique decisions you made and why.
-    A description of problems encountered and how you tackled them.
-    A description of lessons learned.
+    We began our simulator as a modification of <a href="https://cs184.eecs.berkeley.edu/sp19/article/6/assignment-1-rasterizer">Rasterizer</a>. The Sample Buffer data structure and associated transfer operations were causing severe performance problems (see our milestone video), so we removed the sample buffer and modified the pipeline to write directly to a frame buffer.
 </p>
-<h2>Results</h2>
 <p>
-    Your final images, animations, video of your system (whichever is relevant). You can include results that you think show off what you built but that you did not have time to go over on presentation day.
+    When the rendering function is called, particles are brought up to date to the time since the audio started playing.
 </p>
-<h2>Contributions</h2>
+<h4>Particles</h4>
 <p>
-    A clear description of the work contributed by each team member.
+    Particles are rendered using the Bresenham algorithm. Each particle is treated as a circle, where in we divide the circle into eight sections and utilize the natural symmetry of circles to rasterize a line across each of the octants.
 </p>
+<p>
+    We begin with eight points centered at multiples of pi / 8, with a variable x, corresponding to the x axis,  initialized to 0 and a variable y initialized to the particle radius.
+</p>
+<p>
+    By relying on a decision parameter d (which is initialized as 3 - (2 * radius)), we are able to increment our x and y values accordingly, and calculate the desired points on the circumference of the circle and rasterize a line vertically at those points (previously, we rendered a line from the center to the points, but this left some pixels within the circle not covered by the lines). This is done for each octant in the subsequent iterations of the algorithm. This process is repeated until y &lt x, which means we are out of the octant. We repeat this for all particles and with every change in their attributes., as they traverse the screen space.
+</p>
+<h3>Audio</h3>
+<p>
+    A Python script loads the audio and uses SciPy to downsample the signal magnitude to the rate of the simulation- about 200Hz. The signal processing library <a href="https://librosa.github.io/librosa/">LibROSA</a> finds audio onsets (peaks) and beats (peaks that make up the dominant tempo of the song), and a binary vector that indicates the timestep of each onset or beat is recorded alongside the magnitude vector.
+</p>
+<p>
+    The simulator loads the data file, and uses the built-in macOS utility afplay to play the audio.
+</p>
+<h3>Particles</h3>
+<h4>Simulation</h4>
+<p>
+    Particles have attributes such as position(x,y), velocity(vx,vy), acceleration(ax,ay), size, mass, and color.
+</p>
+<p>
+    Within every update loop, particle acceleration is updated based on gravity and a weak repulsive force between particles. Additionally, a distance-weighted sum of neighboring particle velocities is added to velocity.
+</p>
+<p>
+    A grid data structure is used to interact only nearby particles. If the interaction area is drawn to maintain a constant density, simulation runtime is linear with the number of particles. This is a standard optimization for simulations with many particles.
+</p>
+<img src="images/grid.png" width="30%">
+<p>
+    Particle velocity and position are updated according to a simple Euler update step.
+</p>
+<p>
+    As the particles traverse the screenspace, we are constantly checking for collisions between each particle and its surrounding. Collisions are represented by potential overlaps between the particles, as opposed to shared interactive points on the particles surfaces. If at any point the distance between the center of two particles is less than the sum of their radii, we know that a collision took place, and update the particle attributes accordingly. This is done by displacing the two particles by half of the overlaped distance in the direction of the vector created by the particle centers.
+</p>
+<p>The particle velocities are then redirected, one going along the tangent vector to the collision and the other going along the normal while accouting for each of the particles mass. We do this by taking the distance between the two balls, and calculating the normalalized normal vector, as well as the tangent vector. We then find the tangential response by calculating the dot product between the velocity vector and the tangent vector of the collision, and use the values found to update the particles velocities respectively.</p>
+<h4>Choreography</h4>
+<!-- A description of problems encountered and how you tackled them. -->
+<!-- A description of lessons learned. -->
+<p>
+    The onsets and beats from the audio are used to dynamically change the radius and color of each particle.
+    At each onset, the radius is increased, then decays to the natural radius until the next onset (the constants are arbitrary, empirically they work well):
+    radius = 3 * onset - 0.01(radius - natural_radius)
+</p>
+<p>
+    The particles change colors with the tempo of the audio signal input, randomly sampling from a various color subdomains according to a counter, so as to cycle through the color domains and induce the color changes seen. The chosen domains are purple, red, green, blue and gold. A domain is essentially a vector of Colors of a similar hue: once a domain is chosen, the sampled color for each particle is a random element of said domain.
+</p>
+<p>
+    Additionally, the color of a particle is set to a weighted average of the sampled color and a pure white color based on its current velocity. This means at low velocities, the particles will appear white, and at higher velocities, the sampled color will be brighter.
+</p>
+<p>
+    The magnitude of the audio signal is used to affect the strength of vertical gravity. For a magnitude m (ranges from 0 to 1), the y acceleration for all particles is set to 25*(10m - 2). The -2 "bias" term allows the direction of gravity to switch directions when m goes above (+y direction) or below (-y direction) a threshold of 0.20.
+</p>
+<h2>Results Video</h2>
+<!-- Your final images, animations, video of your system (whichever is relevant). You can include results that you think show off what you built but that you did not have time to go over on presentation day. -->
+<iframe width=720 height=640 src="https://drive.google.com/file/d/17PwvQWpMQuUq7x4LVcvI1YAIWmHKPm5p5Q/preview"></iframe>
+<h2>References</h2>
+
+Braley, C. and Sandu, A. *Fluid Simulation For Computer Graphics: A Tutorial in Grid Based and Particle Based Methods*. 2010.
+
+"Inside LiquidFun" https://docs.google.com/presentation/d/1fEAb4-lSyqxlVGNPog3G1LZ7UgtvxfRAwR0dwd19G4g/edit#slide=id.p
+
+"Onset detection" https://librosa.github.io/librosa/onset.html
+"Beat and tempo" https://librosa.github.io/librosa/beat.html
+
+<h2>Contributors</h2>
+
+Brian worked on audio processing, particle simulation, and rasterization.
+
+Yusuf worked on rasterization, particle interaction, and color visualizaiton.
+
+Jayanth worked on rasterization.
 
 <h2>Presentation Slides</h2>
-<p><a href="https://docs.google.com/presentation/d/1nqWs7WGpXyMeB3qPqRfh0bw8vmxwC6JieFSqAaBo820/edit?usp=sharing">Slides</a></p>
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS8hKrcFMm3CVbffRDATXMt9IyhlpVlYanKokXHnDTpmJjn7Ziwl5qeIAava_rc5r61HwW7zBKJozt2/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 </body>
 </html>
