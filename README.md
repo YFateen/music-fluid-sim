@@ -1,6 +1,7 @@
 # Choreographed Particle Simulation
 
 ### We created a real-time particle simulator that synchronizes to music.
+### Video: https://drive.google.com/file/d/17PwvQWpMQuUq7x4LVcvI1YAIWmHKPm5p5Q/view
 
 #### Technical approach
 Code is available here.
