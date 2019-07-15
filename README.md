@@ -1,8 +1,7 @@
 # Choreographed Particle Simulation
-## Yusuf Fateen, Brian Levis, Jayanth Sundaresan
+### Yusuf Fateen, Brian Levis, Jayanth Sundaresan
 
-Abstract
-We created a real-time particle simulator that synchronizes to music.
+#### We created a real-time particle simulator that synchronizes to music.
 
 #### Technical approach
 Code is available here.
